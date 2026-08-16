@@ -1,211 +1,350 @@
+/* =========================================================
+   ELYSIUM ADMIN AUTHENTICATION
+   ========================================================= */
+
 console.log("ELYSIUM ADMIN AUTH JS LOADED");
-/* =========================================================
-   ELYSIUM COCKTAIL LOUNGE
-   ADMIN AUTHENTICATION
-   ========================================================= */
 
 
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+document.addEventListener("DOMContentLoaded", async () => {
 
-const loginScreen =
-    document.getElementById("loginScreen");
-
-const adminDashboard =
-    document.getElementById("adminDashboard");
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const loginEmail =
-    document.getElementById("loginEmail");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-const loginButton =
-    document.getElementById("loginButton");
-
-const loginError =
-    document.getElementById("loginError");
-
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const adminUserEmail =
-    document.getElementById("adminUserEmail");
+    console.log("Admin DOM loaded");
 
 
-/* =========================================================
-   WAIT FOR SUPABASE
-   ========================================================= */
+    /* =====================================================
+       GET ELEMENTS
+       ===================================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
+    const loginScreen =
+        document.getElementById("loginScreen");
 
-        /*
-         * supabase.js creates:
-         *
-         * window.supabaseClient
-         *
-         * We wait until the deferred scripts have
-         * finished loading.
-         */
+    const adminDashboard =
+        document.getElementById("adminDashboard");
 
-        if (
-            !window.supabaseClient
-        ) {
+    const loginForm =
+        document.getElementById("loginForm");
 
-            showLoginError(
-                "Unable to connect to Elysium services. Please refresh the page."
-            );
+    const loginEmail =
+        document.getElementById("loginEmail");
 
-            return;
+    const loginPassword =
+        document.getElementById("loginPassword");
 
-        }
+    const loginButton =
+        document.getElementById("loginButton");
 
+    const loginError =
+        document.getElementById("loginError");
 
-        await checkExistingSession();
+    const logoutButton =
+        document.getElementById("logoutButton");
 
-    }
-);
+    const adminUserEmail =
+        document.getElementById("adminUserEmail");
 
 
-/* =========================================================
-   CHECK EXISTING SESSION
-   ========================================================= */
+    /* =====================================================
+       VERIFY ELEMENTS
+       ===================================================== */
 
-async function checkExistingSession() {
-
-    try {
-
-        const {
-            data,
-            error
-        } =
-            await window.supabaseClient
-                .auth
-                .getSession();
+    console.log("Login form:", loginForm);
+    console.log("Login button:", loginButton);
 
 
-        if (error) {
-
-            console.error(
-                "Session error:",
-                error
-            );
-
-            showLoginScreen();
-
-            return;
-
-        }
-
-
-        const session =
-            data.session;
-
-
-        if (!session) {
-
-            showLoginScreen();
-
-            return;
-
-        }
-
-
-        /*
-         * A session exists.
-         *
-         * We still verify that this user is
-         * actually an Elysium admin.
-         */
-
-        const isAdmin =
-            await verifyAdmin(
-                session.user
-            );
-
-
-        if (!isAdmin) {
-
-            await window.supabaseClient
-                .auth
-                .signOut();
-
-
-            showLoginError(
-                "This account does not have Elysium manager access."
-            );
-
-            return;
-
-        }
-
-
-        showDashboard(
-            session.user
-        );
-
-    } catch (error) {
+    if (!loginForm) {
 
         console.error(
-            "Session check failed:",
-            error
+            "ERROR: loginForm was not found."
         );
 
-        showLoginScreen();
+        return;
 
     }
 
-}
 
+    if (!window.supabaseClient) {
 
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
-loginForm.addEventListener(
-    "submit",
-    async (event) => {
-
-        event.preventDefault();
-
-
-        clearLoginError();
-
-
-        const email =
-            loginEmail.value
-                .trim()
-                .toLowerCase();
-
-
-        const password =
-            loginPassword.value;
-
-
-        if (
-            !email ||
-            !password
-        ) {
-
-            showLoginError(
-                "Please enter your email and password."
-            );
-
-            return;
-
-        }
-
-
-        setLoginLoading(
-            true
+        console.error(
+            "ERROR: Supabase client was not found."
         );
 
+        showError(
+            "Unable to connect to Elysium services. Please refresh the page."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       FORCE INITIAL LOGIN STATE
+       ===================================================== */
+
+    showLoginScreen();
+
+
+    /* =====================================================
+       LOGIN
+       ===================================================== */
+
+    loginForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+            console.log(
+                "LOGIN FORM SUBMITTED"
+            );
+
+
+            clearError();
+
+
+            const email =
+                loginEmail.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                loginPassword.value;
+
+
+            console.log(
+                "Login email:",
+                email
+            );
+
+
+            if (!email || !password) {
+
+                showError(
+                    "Please enter your email and password."
+                );
+
+                return;
+
+            }
+
+
+            loginButton.disabled =
+                true;
+
+            loginButton.textContent =
+                "SIGNING IN...";
+
+
+            try {
+
+                console.log(
+                    "Calling Supabase..."
+                );
+
+
+                const {
+                    data,
+                    error
+                } =
+                    await window.supabaseClient
+                        .auth
+                        .signInWithPassword({
+
+                            email: email,
+
+                            password: password
+
+                        });
+
+
+                console.log(
+                    "Supabase response:",
+                    data,
+                    error
+                );
+
+
+                if (error) {
+
+                    console.error(
+                        "Supabase login error:",
+                        error
+                    );
+
+                    showError(
+                        getFriendlyError(error)
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    !data ||
+                    !data.user
+                ) {
+
+                    showError(
+                        "Login failed. Please try again."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =========================================
+                   VERIFY ADMIN
+                   ========================================= */
+
+                console.log(
+                    "Checking admin profile..."
+                );
+
+
+                const {
+                    data: admin,
+                    error: adminError
+                } =
+                    await window.supabaseClient
+                        .from("admin_profiles")
+                        .select(
+                            "id, email, is_admin"
+                        )
+                        .eq(
+                            "id",
+                            data.user.id
+                        )
+                        .eq(
+                            "is_admin",
+                            true
+                        )
+                        .maybeSingle();
+
+
+                console.log(
+                    "Admin result:",
+                    admin,
+                    adminError
+                );
+
+
+                if (adminError) {
+
+                    console.error(
+                        "Admin verification error:",
+                        adminError
+                    );
+
+                    showError(
+                        "We couldn't verify your manager permissions."
+                    );
+
+                    await window.supabaseClient
+                        .auth
+                        .signOut();
+
+                    return;
+
+                }
+
+
+                if (!admin) {
+
+                    showError(
+                        "This account does not have Elysium manager access."
+                    );
+
+                    await window.supabaseClient
+                        .auth
+                        .signOut();
+
+                    return;
+
+                }
+
+
+                /* =========================================
+                   SUCCESS
+                   ========================================= */
+
+                console.log(
+                    "ELYSIUM ADMIN LOGIN SUCCESS"
+                );
+
+
+                showDashboard(
+                    data.user
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "LOGIN EXCEPTION:",
+                    error
+                );
+
+                showError(
+                    "Something went wrong while signing in."
+                );
+
+            } finally {
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "SIGN IN";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    if (logoutButton) {
+
+        logoutButton.addEventListener(
+            "click",
+            async () => {
+
+                console.log(
+                    "Logging out..."
+                );
+
+
+                await window.supabaseClient
+                    .auth
+                    .signOut();
+
+
+                showLoginScreen();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CHECK EXISTING SESSION
+       ===================================================== */
+
+    await checkExistingSession();
+
+
+    /* =====================================================
+       FUNCTIONS
+       ===================================================== */
+
+
+    async function checkExistingSession() {
 
         try {
 
@@ -215,27 +354,17 @@ loginForm.addEventListener(
             } =
                 await window.supabaseClient
                     .auth
-                    .signInWithPassword({
-
-                        email,
-
-                        password,
-
-                    });
+                    .getSession();
 
 
             if (error) {
 
                 console.error(
-                    "Login error:",
+                    "Session error:",
                     error
                 );
 
-                showLoginError(
-                    getLoginErrorMessage(
-                        error
-                    )
-                );
+                showLoginScreen();
 
                 return;
 
@@ -243,468 +372,230 @@ loginForm.addEventListener(
 
 
             if (
-                !data.user
+                !data ||
+                !data.session
             ) {
 
-                showLoginError(
-                    "We could not verify your account."
-                );
+                showLoginScreen();
 
                 return;
 
             }
 
 
-            /*
-             * IMPORTANT:
-             *
-             * Successfully signing into Supabase
-             * does NOT automatically make someone
-             * an Elysium administrator.
-             *
-             * We check admin_profiles next.
-             */
-
-            const isAdmin =
-                await verifyAdmin(
-                    data.user
-                );
+            console.log(
+                "Existing session found."
+            );
 
 
-            if (!isAdmin) {
+            const user =
+                data.session.user;
+
+
+            const {
+                data: admin,
+                error: adminError
+            } =
+                await window.supabaseClient
+                    .from("admin_profiles")
+                    .select(
+                        "id, email, is_admin"
+                    )
+                    .eq(
+                        "id",
+                        user.id
+                    )
+                    .eq(
+                        "is_admin",
+                        true
+                    )
+                    .maybeSingle();
+
+
+            if (
+                adminError ||
+                !admin
+            ) {
 
                 await window.supabaseClient
                     .auth
                     .signOut();
 
-
-                showLoginError(
-                    "This account does not have Elysium manager access."
-                );
+                showLoginScreen();
 
                 return;
 
             }
 
 
-            loginPassword.value =
-                "";
-
-
             showDashboard(
-                data.user
+                user
             );
-
 
         } catch (error) {
 
             console.error(
-                "Unexpected login error:",
+                "Session check failed:",
                 error
             );
 
-            showLoginError(
-                "Something went wrong while signing in. Please try again."
-            );
-
-        } finally {
-
-            setLoginLoading(
-                false
-            );
+            showLoginScreen();
 
         }
 
     }
-);
 
 
-/* =========================================================
-   VERIFY ADMIN
-   ========================================================= */
+    function showLoginScreen() {
 
-async function verifyAdmin(
-    user
-) {
+        /*
+         * Login visible
+         */
 
-    if (
-        !user ||
-        !user.id
-    ) {
-
-        return false;
-
-    }
+        loginScreen.hidden =
+            false;
 
 
-    try {
+        /*
+         * Dashboard completely hidden
+         */
 
-        const {
-            data,
-            error
-        } =
-            await window.supabaseClient
-                .from(
-                    "admin_profiles"
-                )
-                .select(
-                    "id, email, is_admin"
-                )
-                .eq(
-                    "id",
-                    user.id
-                )
-                .eq(
-                    "is_admin",
-                    true
-                )
-                .maybeSingle();
+        adminDashboard.hidden =
+            true;
 
 
-        if (error) {
-
-            console.error(
-                "Admin verification error:",
-                error
+        document.body.classList
+            .remove(
+                "admin-authenticated"
             );
 
-            return false;
-
-        }
-
-
-        return Boolean(
-            data
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Admin verification failed:",
-            error
-        );
-
-        return false;
-
     }
 
-}
 
-
-/* =========================================================
-   SHOW DASHBOARD
-   ========================================================= */
-
-function showDashboard(
-    user
-) {
-
-    loginScreen.hidden =
-        true;
-
-    adminDashboard.hidden =
-        false;
-
-
-    if (
-        adminUserEmail &&
+    function showDashboard(
         user
     ) {
 
-        adminUserEmail.textContent =
-            user.email || "Manager";
+        /*
+         * Login completely hidden
+         */
 
-    }
+        loginScreen.hidden =
+            true;
 
 
-    /*
-     * Tell the rest of the admin application
-     * that authentication is complete.
-     */
+        /*
+         * Dashboard visible
+         */
 
-    window.dispatchEvent(
-        new CustomEvent(
-            "elysiumAdminReady",
-            {
-                detail: {
-                    user
-                }
-            }
-        )
-    );
+        adminDashboard.hidden =
+            false;
 
-}
 
-
-/* =========================================================
-   SHOW LOGIN
-   ========================================================= */
-
-function showLoginScreen() {
-
-    loginScreen.hidden =
-        false;
-
-    adminDashboard.hidden =
-        true;
-
-
-    if (
-        loginEmail
-    ) {
-
-        loginEmail.focus();
-
-    }
-
-}
-
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-if (
-    logoutButton
-) {
-
-    logoutButton.addEventListener(
-        "click",
-        async () => {
-
-            logoutButton.disabled =
-                true;
-
-
-            try {
-
-                const {
-                    error
-                } =
-                    await window.supabaseClient
-                        .auth
-                        .signOut();
-
-
-                if (error) {
-
-                    console.error(
-                        "Logout error:",
-                        error
-                    );
-
-                    return;
-
-                }
-
-
-                showLoginScreen();
-
-
-            } catch (error) {
-
-                console.error(
-                    "Unexpected logout error:",
-                    error
-                );
-
-            } finally {
-
-                logoutButton.disabled =
-                    false;
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   AUTH STATE CHANGES
-   ========================================================= */
-
-if (
-    window.supabaseClient
-) {
-
-    window.supabaseClient
-        .auth
-        .onAuthStateChange(
-            async (
-                event,
-                session
-            ) => {
-
-                /*
-                 * SIGNED_OUT
-                 */
-
-                if (
-                    event ===
-                    "SIGNED_OUT"
-                ) {
-
-                    showLoginScreen();
-
-                    return;
-
-                }
-
-
-                /*
-                 * INITIAL_SESSION is handled by
-                 * checkExistingSession().
-                 *
-                 * We don't want to duplicate
-                 * verification here.
-                 */
-
-                if (
-                    event ===
-                    "INITIAL_SESSION"
-                ) {
-
-                    return;
-
-                }
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   LOGIN LOADING STATE
-   ========================================================= */
-
-function setLoginLoading(
-    loading
-) {
-
-    if (
-        !loginButton
-    ) {
-
-        return;
-
-    }
-
-
-    loginButton.disabled =
-        loading;
-
-
-    if (
-        loading
-    ) {
-
-        loginButton.dataset
-            .originalText =
-                loginButton.textContent;
-
-        loginButton.textContent =
-            "SIGNING IN...";
-
-    } else {
-
-        loginButton.textContent =
-            loginButton.dataset
-                .originalText ||
-            "SIGN IN";
-
-    }
-
-}
-
-
-/* =========================================================
-   LOGIN ERROR
-   ========================================================= */
-
-function showLoginError(
-    message
-) {
-
-    if (
-        !loginError
-    ) {
-
-        return;
-
-    }
-
-
-    loginError.textContent =
-        message;
-
-    loginError.hidden =
-        false;
-
-}
-
-
-function clearLoginError() {
-
-    if (
-        !loginError
-    ) {
-
-        return;
-
-    }
-
-
-    loginError.textContent =
-        "";
-
-    loginError.hidden =
-        true;
-
-}
-
-
-/* =========================================================
-   FRIENDLY LOGIN ERRORS
-   ========================================================= */
-
-function getLoginErrorMessage(
-    error
-) {
-
-    if (
-        !error
-    ) {
-
-        return "Unable to sign in.";
-
-    }
-
-
-    switch (
-        error.message
-    ) {
-
-        case "Invalid login credentials":
-
-            return "The email or password is incorrect.";
-
-
-        case "Email not confirmed":
-
-            return "Please confirm your email address before signing in.";
-
-
-        default:
-
-            return (
-                error.message ||
-                "Unable to sign in. Please try again."
+        document.body.classList
+            .add(
+                "admin-authenticated"
             );
 
+
+        if (
+            adminUserEmail &&
+            user
+        ) {
+
+            adminUserEmail.textContent =
+                user.email || "Manager";
+
+        }
+
+
+        window.dispatchEvent(
+            new CustomEvent(
+                "elysiumAdminReady",
+                {
+                    detail: {
+                        user
+                    }
+                }
+            )
+        );
+
     }
 
-}
+
+    function showError(
+        message
+    ) {
+
+        if (!loginError) {
+
+            return;
+
+        }
+
+
+        loginError.textContent =
+            message;
+
+        loginError.hidden =
+            false;
+
+    }
+
+
+    function clearError() {
+
+        if (!loginError) {
+
+            return;
+
+        }
+
+
+        loginError.textContent =
+            "";
+
+        loginError.hidden =
+            true;
+
+    }
+
+
+    function getFriendlyError(
+        error
+    ) {
+
+        if (
+            error &&
+            error.message ===
+            "Invalid login credentials"
+        ) {
+
+            return (
+                "The email or password is incorrect."
+            );
+
+        }
+
+
+        if (
+            error &&
+            error.message ===
+            "Email not confirmed"
+        ) {
+
+            return (
+                "Please confirm your email address before signing in."
+            );
+
+        }
+
+
+        return (
+            error?.message ||
+            "Unable to sign in."
+        );
+
+    }
+
+});
