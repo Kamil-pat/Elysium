@@ -1,3 +1,4 @@
+console.log("ELYSIUM ADMIN AUTH JS LOADED");
 /* =========================================================
    ELYSIUM COCKTAIL LOUNGE
    ADMIN AUTHENTICATION
