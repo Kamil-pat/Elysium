@@ -1434,3 +1434,1018 @@
     }
 
 }
+
+/* =========================================================
+   COCKTAIL CLASS MANAGEMENT
+   ========================================================= */
+
+.admin-class-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* =========================================================
+   CLASS CARD
+   ========================================================= */
+
+.admin-class-card {
+    display: flex;
+    overflow: hidden;
+    background: var(--admin-card-bg, #171717);
+    border: 1px solid var(--admin-border, rgba(255,255,255,.1));
+    border-radius: 14px;
+    transition: border-color .2s ease, transform .2s ease;
+}
+
+.admin-class-card:hover {
+    border-color: rgba(255,255,255,.2);
+    transform: translateY(-1px);
+}
+
+
+.admin-class-card-image {
+    width: 220px;
+    min-width: 220px;
+    min-height: 250px;
+    overflow: hidden;
+}
+
+
+.admin-class-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.admin-class-card-content {
+    flex: 1;
+    padding: 24px;
+}
+
+
+/* =========================================================
+   CLASS CARD HEADER
+   ========================================================= */
+
+.admin-class-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+
+.admin-class-card-top h3 {
+    margin: 5px 0 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+
+.admin-class-date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 18px;
+}
+
+
+.admin-class-date strong {
+    font-size: 16px;
+}
+
+
+.admin-class-date span {
+    opacity: .7;
+    font-size: 14px;
+}
+
+
+.admin-class-description {
+    max-width: 700px;
+    margin: 16px 0;
+    line-height: 1.6;
+    opacity: .75;
+}
+
+
+/* =========================================================
+   CAPACITY
+   ========================================================= */
+
+.admin-class-capacity {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 22px 0;
+}
+
+
+.admin-class-capacity > div {
+    min-width: 100px;
+    padding: 12px 16px;
+    border: 1px solid var(--admin-border, rgba(255,255,255,.1));
+    border-radius: 8px;
+}
+
+
+.admin-class-capacity span {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+    letter-spacing: .12em;
+    opacity: .55;
+}
+
+
+.admin-class-capacity strong {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.admin-class-capacity strong.sold-out {
+    opacity: .5;
+}
+
+
+/* =========================================================
+   CLASS ACTIONS
+   ========================================================= */
+
+.admin-class-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   ADMIN BUTTONS
+   ========================================================= */
+
+.admin-secondary-button,
+.admin-gold-button,
+.admin-danger-button {
+    min-height: 42px;
+    padding: 0 17px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    cursor: pointer;
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        opacity .2s ease;
+}
+
+
+.admin-secondary-button {
+    color: inherit;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.18);
+}
+
+
+.admin-secondary-button:hover {
+    background: rgba(255,255,255,.07);
+    border-color: rgba(255,255,255,.35);
+}
+
+
+.admin-gold-button {
+    color: #111;
+    background: #d6b36a;
+    border: 1px solid #d6b36a;
+}
+
+
+.admin-gold-button:hover {
+    opacity: .88;
+}
+
+
+.admin-danger-button {
+    color: #e8b2b2;
+    background: transparent;
+    border: 1px solid rgba(190,90,90,.4);
+}
+
+
+.admin-danger-button:hover {
+    background: rgba(190,90,90,.1);
+    border-color: rgba(190,90,90,.65);
+}
+
+
+.admin-secondary-button:disabled,
+.admin-gold-button:disabled,
+.admin-danger-button:disabled {
+    cursor: not-allowed;
+    opacity: .45;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.admin-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+    padding: 40px;
+    text-align: center;
+    border: 1px dashed rgba(255,255,255,.14);
+    border-radius: 12px;
+}
+
+
+.admin-empty-state > span {
+    margin-bottom: 15px;
+    font-size: 28px;
+    opacity: .5;
+}
+
+
+.admin-empty-state p {
+    margin: 0 0 20px;
+    opacity: .65;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.admin-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(8px);
+}
+
+
+.admin-modal {
+    width: min(760px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: var(--admin-card-bg, #171717);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+
+    box-shadow: 0 25px 80px rgba(0,0,0,.5);
+}
+
+
+.admin-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+
+    padding: 26px 28px;
+
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+
+.admin-modal-header h2 {
+    margin: 5px 0 0;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+
+.admin-modal-subtitle {
+    margin: 8px 0 0;
+    opacity: .6;
+    font-size: 13px;
+}
+
+
+.admin-modal-close {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    color: inherit;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.admin-modal-close:hover {
+    background: rgba(255,255,255,.07);
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.admin-class-form {
+    padding: 28px;
+}
+
+
+.admin-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+.admin-form-full {
+    grid-column: 1 / -1;
+}
+
+
+.admin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.admin-form-group label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .7;
+}
+
+
+.admin-form-group input,
+.admin-form-group textarea,
+.admin-form-group select {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    color: inherit;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+    transition: border-color .2s ease;
+}
+
+
+.admin-form-group input:focus,
+.admin-form-group textarea:focus,
+.admin-form-group select:focus {
+    border-color: rgba(214,179,106,.7);
+}
+
+
+.admin-form-group textarea {
+    resize: vertical;
+    line-height: 1.5;
+}
+
+
+.admin-form-help {
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: .5;
+}
+
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+
+.admin-checkbox-group {
+    margin-top: 2px;
+}
+
+
+.admin-checkbox-label {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 10px;
+
+    cursor: pointer;
+}
+
+
+.admin-checkbox-label input {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: #d6b36a;
+}
+
+
+/* =========================================================
+   FORM ERROR
+   ========================================================= */
+
+.admin-form-error {
+    margin-top: 20px;
+    padding: 12px 14px;
+
+    color: #efb2b2;
+    background: rgba(180,70,70,.1);
+    border: 1px solid rgba(180,70,70,.25);
+    border-radius: 7px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+   ========================================================= */
+
+.admin-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 28px;
+    padding-top: 22px;
+
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+
+/* =========================================================
+   BOOKINGS MODAL
+   ========================================================= */
+
+.admin-bookings-modal {
+    width: min(850px, 100%);
+}
+
+
+.admin-booking-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    padding: 22px 28px;
+
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+
+.admin-booking-summary > div {
+    padding: 14px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,.035);
+    border-radius: 8px;
+}
+
+
+.admin-booking-summary span {
+    display: block;
+    margin-bottom: 5px;
+
+    font-size: 10px;
+    letter-spacing: .1em;
+    opacity: .5;
+}
+
+
+.admin-booking-summary strong {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+.admin-bookings-list {
+    padding: 8px 28px 28px;
+}
+
+
+.admin-booking-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+
+.admin-booking-row:last-child {
+    border-bottom: 0;
+}
+
+
+.admin-booking-row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.admin-booking-row > div:last-child {
+    align-items: flex-end;
+}
+
+
+.admin-booking-row strong {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.admin-booking-row span {
+    font-size: 12px;
+    opacity: .55;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.admin-loading {
+    min-height: 200px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: .55;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .admin-class-card {
+        flex-direction: column;
+    }
+
+
+    .admin-class-card-image {
+        width: 100%;
+        min-width: 0;
+        height: 220px;
+        min-height: 0;
+    }
+
+
+    .admin-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .admin-form-full {
+        grid-column: auto;
+    }
+
+
+    .admin-booking-summary {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .admin-modal-overlay {
+        padding: 10px;
+    }
+
+
+    .admin-modal-header,
+    .admin-class-form {
+        padding: 20px;
+    }
+
+
+    .admin-class-card-content {
+        padding: 18px;
+    }
+
+
+    .admin-class-card-top {
+        flex-direction: column;
+    }
+
+
+    .admin-class-capacity {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .admin-class-actions {
+        flex-direction: column;
+    }
+
+
+    .admin-class-actions button {
+        width: 100%;
+    }
+
+
+    .admin-modal-footer {
+        flex-direction: column-reverse;
+    }
+
+
+    .admin-modal-footer button {
+        width: 100%;
+    }
+
+
+    .admin-booking-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .admin-booking-row > div:last-child {
+        align-items: flex-start;
+    }
+
+}
+
+/* =========================================================
+   SECTION TOOLBAR
+   ========================================================= */
+
+.admin-section-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+
+.admin-section-toolbar h2 {
+    margin: 4px 0 5px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+
+.admin-toolbar-description {
+    max-width: 600px;
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: .55;
+}
+
+
+@media (max-width: 650px) {
+
+    .admin-section-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-section-toolbar button {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   WEBSITE PHOTO MANAGER
+   ========================================================= */
+
+.admin-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+/* =========================================================
+   PHOTO CARD
+   ========================================================= */
+
+.admin-photo-card {
+    overflow: hidden;
+
+    background: var(--admin-card-bg, #171717);
+    border: 1px solid var(--admin-border, rgba(255,255,255,.1));
+    border-radius: 12px;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+
+.admin-photo-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,.22);
+}
+
+
+/* =========================================================
+   PHOTO PREVIEW
+   ========================================================= */
+
+.admin-photo-preview {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    background: #111;
+}
+
+
+.admin-photo-preview img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .35s ease,
+        opacity .2s ease;
+}
+
+
+.admin-photo-card:hover
+.admin-photo-preview img {
+    transform: scale(1.03);
+}
+
+
+.admin-photo-no-image {
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+    opacity: .4;
+}
+
+
+/* =========================================================
+   VISIBILITY BADGE
+   ========================================================= */
+
+.admin-photo-visibility {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    padding: 6px 9px;
+
+    border-radius: 4px;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+
+    backdrop-filter: blur(8px);
+}
+
+
+.admin-photo-visibility.visible {
+    color: #d9e8d9;
+    background: rgba(30,90,45,.75);
+    border: 1px solid rgba(120,190,125,.25);
+}
+
+
+.admin-photo-visibility.hidden {
+    color: #e0caca;
+    background: rgba(90,35,35,.75);
+    border: 1px solid rgba(190,100,100,.25);
+}
+
+
+/* =========================================================
+   PHOTO CONTENT
+   ========================================================= */
+
+.admin-photo-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 170px;
+
+    padding: 18px;
+}
+
+
+.admin-photo-card-content h3 {
+    margin: 5px 0 8px;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.admin-photo-card-content > div:first-child > p:last-child {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.55;
+
+    opacity: .55;
+}
+
+
+/* =========================================================
+   PHOTO ACTIONS
+   ========================================================= */
+
+.admin-photo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+
+.admin-photo-actions button {
+    flex: 1;
+    min-width: 70px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/* =========================================================
+   FILE INPUT
+   ========================================================= */
+
+.admin-form-group input[type="file"] {
+    padding: 9px;
+
+    cursor: pointer;
+}
+
+
+.admin-form-group input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 12px;
+
+    color: inherit;
+    background: rgba(255,255,255,.08);
+
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 5px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.admin-form-group input[type="file"]::file-selector-button:hover {
+    background: rgba(255,255,255,.13);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .admin-photo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .admin-photo-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .admin-photo-actions {
+        flex-direction: column;
+    }
+
+
+    .admin-photo-actions button {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   PHOTO CATEGORY SELECT
+   ========================================================= */
+
+.admin-form-group select {
+    appearance: auto;
+    cursor: pointer;
+}
+
+.admin-form-group select option {
+    background: #171717;
+    color: inherit;
+}
+
+/* =========================================================
+   COCKTAIL CLASS IMAGE
+   ========================================================= */
+
+.admin-class-image-preview {
+    position: relative;
+
+    width: 220px;
+    margin-top: 12px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px;
+}
+
+
+.admin-class-image-preview img {
+    display: block;
+
+    width: 100%;
+    height: 140px;
+
+    object-fit: cover;
+}
+
+
+.admin-class-image-preview span {
+    display: block;
+
+    padding: 8px 10px;
+
+    background: rgba(0,0,0,.45);
+
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    opacity: .7;
+}

@@ -392,5 +392,218 @@ document.addEventListener("DOMContentLoaded", () => {
         "Your escape from the ordinary."
     );
 
+    /* =====================================================
+       9. SUPABASE WEBSITE PHOTOS
+       ===================================================== */
+
+    async function loadWebsitePhotos() {
+
+        /*
+         * Make sure Supabase is available.
+         */
+
+        if (
+            typeof supabaseClient === "undefined"
+        ) {
+
+            console.warn(
+                "Supabase client is not available."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Find all images that are controlled
+         * by the website photo manager.
+         */
+
+        const cmsImages =
+            document.querySelectorAll(
+                "[data-cms-photo]"
+            );
+
+
+        if (
+            cmsImages.length === 0
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from(
+                        "website_photos"
+                    )
+                    .select(
+                        "*"
+                    )
+                    .eq(
+                        "is_visible",
+                        true
+                    )
+                    .order(
+                        "display_order",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            const photos =
+                data || [];
+
+
+            /*
+             * Replace each CMS-controlled image
+             * with the corresponding Supabase image.
+             */
+
+            cmsImages.forEach(
+                (image) => {
+
+                    const category =
+                        image.dataset
+                            .cmsPhoto;
+
+                    const slot =
+                        Number(
+                            image.dataset
+                                .cmsPhotoSlot
+                        );
+
+
+                    if (
+                        !category ||
+                        !slot
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const matchingPhotos =
+                        photos.filter(
+                            (photo) =>
+                                photo.category ===
+                                category
+                        );
+
+
+                    const photo =
+                        matchingPhotos[
+                            slot - 1
+                        ];
+
+
+                    /*
+                     * If the manager hasn't uploaded
+                     * enough photos for this slot,
+                     * keep the original website image.
+                     */
+
+                    if (!photo) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !photo.storage_path
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const {
+                        data
+                    } =
+                        supabaseClient
+                            .storage
+                            .from(
+                                "elysium-media"
+                            )
+                            .getPublicUrl(
+                                photo.storage_path
+                            );
+
+
+                    if (
+                        !data ||
+                        !data.publicUrl
+                    ) {
+
+                        console.warn(
+                            "Unable to create image URL for:",
+                            photo.storage_path
+                        );
+
+                        return;
+
+                    }
+
+
+                    image.src =
+                        data.publicUrl;
+
+
+                    /*
+                     * Use the manager's title as
+                     * the accessibility alt text
+                     * when available.
+                     */
+
+                    if (
+                        photo.title
+                    ) {
+
+                        image.alt =
+                            photo.title;
+
+                    }
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load website photos:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Load managed photos after the DOM exists.
+     */
+
+    loadWebsitePhotos();
+
 });
 
