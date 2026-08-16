@@ -84,7 +84,7 @@ async function checkExistingSession() {
             data,
             error
         } =
-            await supabaseClient
+            await window.supabaseClient
                 .auth
                 .getSession();
 
@@ -131,7 +131,7 @@ async function checkExistingSession() {
 
         if (!isAdmin) {
 
-            await supabaseClient
+            await window.supabaseClient
                 .auth
                 .signOut();
 
@@ -212,7 +212,7 @@ loginForm.addEventListener(
                 data,
                 error
             } =
-                await supabaseClient
+                await window.supabaseClient
                     .auth
                     .signInWithPassword({
 
@@ -272,7 +272,7 @@ loginForm.addEventListener(
 
             if (!isAdmin) {
 
-                await supabaseClient
+                await window.supabaseClient
                     .auth
                     .signOut();
 
@@ -342,7 +342,7 @@ async function verifyAdmin(
             data,
             error
         } =
-            await supabaseClient
+            await window.supabaseClient
                 .from(
                     "admin_profiles"
                 )
@@ -481,7 +481,7 @@ if (
                 const {
                     error
                 } =
-                    await supabaseClient
+                    await window.supabaseClient
                         .auth
                         .signOut();
 
@@ -529,7 +529,7 @@ if (
     window.supabaseClient
 ) {
 
-    supabaseClient
+    window.supabaseClient
         .auth
         .onAuthStateChange(
             async (
