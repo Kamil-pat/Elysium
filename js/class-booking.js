@@ -365,182 +365,371 @@ document.addEventListener("DOMContentLoaded", () => {
        SUBMIT BOOKING
        ===================================================== */
 
-    form.addEventListener(
-        "submit",
-        async (event) => {
+    /* =====================================================
+   SUBMIT BOOKING
+   ===================================================== */
 
-            event.preventDefault();
+        form.addEventListener(
+            "submit",
+            async (event) => {
 
-
-            if (!classData) {
-                return;
-            }
-
-
-            const submitButton =
-                document.getElementById(
-                    "booking-submit"
-                );
+                event.preventDefault();
 
 
-            const errorBox =
-                document.getElementById(
-                    "booking-form-error"
-                );
+                if (!classData) {
 
+                    console.error(
+                        "Booking cannot be submitted: classData is missing."
+                    );
 
-            errorBox.hidden = true;
+                    return;
 
-
-            const guestCount =
-                Number(
-                    document.getElementById(
-                        "guest-count"
-                    ).value
-                );
-
-
-            const name =
-                document.getElementById(
-                    "customer-name"
-                ).value.trim();
-
-
-            const email =
-                document.getElementById(
-                    "customer-email"
-                ).value.trim();
-
-
-            const phone =
-                document.getElementById(
-                    "customer-phone"
-                ).value.trim();
-
-
-            const notes =
-                document.getElementById(
-                    "booking-notes"
-                ).value.trim();
-
-
-            if (
-                !guestCount ||
-                guestCount < 1
-            ) {
-
-                showFormError(
-                    "Please select the number of guests."
-                );
-
-                return;
-
-            }
-
-
-            if (!name) {
-
-                showFormError(
-                    "Please enter your name."
-                );
-
-                return;
-
-            }
-
-
-            if (!email) {
-
-                showFormError(
-                    "Please enter your email address."
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * Disable the button while the request
-             * is being processed.
-             */
-
-            submitButton.disabled = true;
-
-            submitButton.textContent =
-                "Submitting...";
-
-
-            try {
-
-                /*
-                 * The database function performs the
-                 * FINAL capacity check.
-                 */
-
-                const {
-                    data,
-                    error
-                } = await supabaseClient.rpc(
-                    "book_cocktail_class",
-                    {
-                        p_class_id:
-                            classData.id,
-
-                        p_customer_name:
-                            name,
-
-                        p_customer_email:
-                            email,
-
-                        p_customer_phone:
-                            phone || null,
-
-                        p_number_of_guests:
-                            guestCount,
-
-                        p_notes:
-                            notes || null
-                    }
-                );
-
-
-                if (error) {
-                    throw error;
                 }
 
 
-                const result =
-                    Array.isArray(data)
-                        ? data[0]
-                        : data;
+                const submitButton =
+                    document.getElementById(
+                        "booking-submit"
+                    );
 
 
-                /*
-                 * Database rejected the booking.
-                 *
-                 * Most likely another customer booked
-                 * the remaining spots while this customer
-                 * was filling out the form.
-                 */
+                const errorBox =
+                    document.getElementById(
+                        "booking-form-error"
+                    );
+
+
+                errorBox.hidden = true;
+
+
+                const guestCount =
+                    Number(
+                        document.getElementById(
+                            "guest-count"
+                        ).value
+                    );
+
+
+                const name =
+                    document.getElementById(
+                        "customer-name"
+                    ).value.trim();
+
+
+                const email =
+                    document.getElementById(
+                        "customer-email"
+                    ).value.trim();
+
+
+                const phone =
+                    document.getElementById(
+                        "customer-phone"
+                    ).value.trim();
+
+
+                const notes =
+                    document.getElementById(
+                        "booking-notes"
+                    ).value.trim();
+
+
+                /* =================================================
+                VALIDATION
+                ================================================= */
 
                 if (
-                    !result ||
-                    result.success !== true
+                    !guestCount ||
+                    guestCount < 1
                 ) {
 
                     showFormError(
-                        result?.error ||
-                        "We're sorry, those spots are no longer available."
+                        "Please select the number of guests."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!name) {
+
+                    showFormError(
+                        "Please enter your name."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!email) {
+
+                    showFormError(
+                        "Please enter your email address."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                SUBMITTING STATE
+                ================================================= */
+
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Submitting...";
+
+
+                console.log(
+                    "Elysium: cocktail class booking successful:",
+                    {
+                        classId: classData.id,
+                        guestCount: guestCount,
+                        customerName: name,
+                        customerEmail: email
+                    }
+                );
+
+                /* Show successful submission */
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Submitted ✓";
+
+
+                /*
+                * Keep the result available to the timeout
+                * callback.
+                */
+                const successfulResult =
+                    {
+                        classId: classData.id,
+                        guestCount: guestCount,
+                        customerName: name,
+                        customerEmail: email
+                    };
+
+
+                setTimeout(() => {
+
+                    showSuccess(
+                        successfulResult
+                    );
+
+                }, 700);
+
+
+                try {
+
+                    /* =============================================
+                    CALL DATABASE BOOKING FUNCTION
+                    ============================================= */
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient.rpc(
+                            "book_cocktail_class",
+                            {
+                                p_class_id:
+                                    classData.id,
+
+                                p_customer_name:
+                                    name,
+
+                                p_customer_email:
+                                    email,
+
+                                p_customer_phone:
+                                    phone || null,
+
+                                p_number_of_guests:
+                                    guestCount,
+
+                                p_notes:
+                                    notes || null
+                            }
+                        );
+
+
+                    console.log(
+                        "Elysium: booking RPC returned:",
+                        {
+                            data,
+                            error
+                        }
+                    );
+
+
+                    /* =============================================
+                    SUPABASE ERROR
+                    ============================================= */
+
+                    if (error) {
+
+                        throw error;
+
+                    }
+
+
+                    /* =============================================
+                    NORMALIZE JSON RESPONSE
+                    ============================================= */
+
+                    let result =
+                        data;
+
+
+                    /*
+                    * Supabase normally returns JSON as an object.
+                    * This also handles the possibility that the
+                    * response arrives as a JSON string.
+                    */
+
+                    if (
+                        typeof result === "string"
+                    ) {
+
+                        try {
+
+                            result =
+                                JSON.parse(
+                                    result
+                                );
+
+                        } catch (parseError) {
+
+                            console.error(
+                                "Unable to parse booking response:",
+                                parseError
+                            );
+
+                        }
+
+                    }
+
+
+                    console.log(
+                        "Elysium: normalized booking result:",
+                        result
+                    );
+
+
+                    /* =============================================
+                    DATABASE REJECTED BOOKING
+                    ============================================= */
+
+                    if (
+                        !result ||
+                        result.success !== true
+                    ) {
+
+                        showFormError(
+                            result?.error ||
+                            "We're sorry, those spots are no longer available."
+                        );
+
+
+                        /*
+                        * IMPORTANT:
+                        * Reset the button BEFORE attempting to
+                        * reload availability.
+                        */
+
+                        submitButton.disabled =
+                            false;
+
+                        submitButton.textContent =
+                            "Request My Spots";
+
+
+                        /*
+                        * Refresh availability, but don't allow
+                        * a refresh problem to keep the form stuck.
+                        */
+
+                        try {
+
+                            await Promise.race([
+
+                                loadClass(),
+
+                                new Promise(
+                                    (_, reject) => {
+
+                                        setTimeout(
+                                            () => {
+
+                                                reject(
+                                                    new Error(
+                                                        "Availability refresh timed out."
+                                                    )
+                                                );
+
+                                            },
+                                            5000
+                                        );
+
+                                    }
+                                )
+
+                            ]);
+
+                        } catch (
+                            availabilityError
+                        ) {
+
+                            console.warn(
+                                "Unable to refresh availability:",
+                                availabilityError
+                            );
+
+                        }
+
+
+                        return;
+
+                    }
+
+
+                    /* =============================================
+                    SUCCESS
+                    ============================================= */
+
+                    console.log(
+                        "Elysium: cocktail class booking successful:",
+                        result
+                    );
+
+
+                    showSuccess(
+                        result
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Elysium booking error:",
+                        error
+                    );
+
+
+                    showFormError(
+                        error?.message ||
+                        "Something went wrong while submitting your request. Please try again."
                     );
 
 
                     /*
-                     * Reload current availability.
-                     */
-
-                    await loadClass();
-
+                    * ALWAYS restore the button if something
+                    * goes wrong.
+                    */
 
                     submitButton.disabled =
                         false;
@@ -548,43 +737,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     submitButton.textContent =
                         "Request My Spots";
 
-                    return;
-
                 }
 
-
-                /*
-                 * Success.
-                 */
-
-                showSuccess(
-                    result
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "Booking error:",
-                    error
-                );
-
-
-                showFormError(
-                    "Something went wrong while submitting your request. Please try again."
-                );
-
-
-                submitButton.disabled =
-                    false;
-
-                submitButton.textContent =
-                    "Request My Spots";
-
             }
-
-        }
-    );
+        );
 
 
     /* =====================================================
