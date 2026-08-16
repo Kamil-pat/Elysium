@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Elysium | Manager Dashboard
+    </title>
+
+
+    <!-- =====================================================
+         GLOBAL CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/global.css"
+    >
+
+
+    <!-- =====================================================
+         ADMIN CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="./css/admin.css"
+    >
+
+
+    <!-- =====================================================
+         SUPABASE
+         ===================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+        defer
+    ></script>
+
+</head>
+
+
+<body class="admin-page">
+
+
+<!-- =========================================================
+     LOGIN SCREEN
+     ========================================================= -->
+
+<section
+    id="loginScreen"
+    class="admin-login-screen"
+>
+
+    <div class="admin-login-card">
+
+
+        <!-- Logo -->
+
+        <div class="admin-login-logo">
+
+            <div class="admin-laurel">
+
+                <span>❧</span>
+
+            </div>
+
+
+            <h1>
+                ELYSIUM
+            </h1>
+
+
+            <p>
+                MANAGER PORTAL
+            </p>
+
+        </div>
+
+
+        <!-- Login -->
+
+        <form
+            id="loginForm"
+            class="admin-login-form"
+        >
+
+            <div class="admin-form-group">
+
+                <label for="loginEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    name="email"
+                    placeholder="Manager email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="admin-form-group">
+
+                <label for="loginPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    name="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <div
+                id="loginError"
+                class="admin-login-error"
+                hidden
+            ></div>
+
+
+            <button
+                type="submit"
+                class="admin-gold-button"
+                id="loginButton"
+            >
+
+                SIGN IN
+
+            </button>
+
+        </form>
+
+
+        <p class="admin-login-footer">
+
+            Elysium Cocktail Lounge
+            <br>
+            Huntsville, Alabama
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ADMIN DASHBOARD
+     ========================================================= -->
+
+<div
+    id="adminDashboard"
+    class="admin-dashboard"
+    hidden
+>
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="admin-sidebar">
+
+
+        <!-- Brand -->
+
+        <div class="admin-sidebar-brand">
+
+            <div class="admin-sidebar-laurel">
+                ❧
+            </div>
+
+            <div>
+
+                <div class="admin-sidebar-title">
+                    ELYSIUM
+                </div>
+
+                <div class="admin-sidebar-subtitle">
+                    MANAGER
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="admin-navigation">
+
+
+            <button
+                type="button"
+                class="admin-nav-item active"
+                data-section="dashboard"
+            >
+
+                <span class="admin-nav-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="admin-nav-item"
+                data-section="menu"
+            >
+
+                <span class="admin-nav-icon">
+                    ≡
+                </span>
+
+                <span>
+                    Menu
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="admin-nav-item"
+                data-section="photos"
+            >
+
+                <span class="admin-nav-icon">
+                    □
+                </span>
+
+                <span>
+                    Photos
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="admin-nav-item"
+                data-section="private-room"
+            >
+
+                <span class="admin-nav-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Private Rooms
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="admin-nav-item"
+                data-section="cocktail-classes"
+            >
+
+                <span class="admin-nav-icon">
+                    ◯
+                </span>
+
+                <span>
+                    Cocktail Classes
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="admin-nav-item"
+                data-section="faq"
+            >
+
+                <span class="admin-nav-icon">
+                    ?
+                </span>
+
+                <span>
+                    FAQ
+                </span>
+
+            </button>
+
+
+        </nav>
+
+
+        <!-- Sidebar bottom -->
+
+        <div class="admin-sidebar-bottom">
+
+
+            <a
+                href="../index.html"
+                target="_blank"
+                class="admin-sidebar-link"
+            >
+
+                <span>
+                    ↗
+                </span>
+
+                View Website
+
+            </a>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="admin-sidebar-link admin-logout"
+            >
+
+                <span>
+                    ←
+                </span>
+
+                Sign Out
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="admin-topbar">
+
+
+            <div>
+
+                <p class="admin-topbar-label">
+                    ELYSIUM COCKTAIL LOUNGE
+                </p>
+
+                <h1
+                    id="pageTitle"
+                    class="admin-page-title"
+                >
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="admin-user-area">
+
+                <div class="admin-user-info">
+
+                    <span class="admin-user-label">
+                        Signed in as
+                    </span>
+
+                    <span
+                        id="adminUserEmail"
+                        class="admin-user-email"
+                    >
+                        Manager
+                    </span>
+
+                </div>
+
+
+                <div class="admin-user-avatar">
+                    E
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD SECTION
+             ================================================= -->
+
+        <section
+            id="section-dashboard"
+            class="admin-content-section active"
+        >
+
+
+            <div class="admin-section-heading">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        OVERVIEW
+                    </p>
+
+                    <h2>
+                        Welcome to Elysium.
+                    </h2>
+
+                    <p>
+                        Manage your website content,
+                        private events, cocktail classes,
+                        and more from one place.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Stats -->
+
+            <div class="admin-stat-grid">
+
+
+                <div class="admin-stat-card">
+
+                    <span class="admin-stat-label">
+                        PENDING REQUESTS
+                    </span>
+
+                    <strong
+                        id="pendingRequestsCount"
+                        class="admin-stat-number"
+                    >
+                        —
+                    </strong>
+
+                    <span class="admin-stat-description">
+                        Private room requests
+                    </span>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <span class="admin-stat-label">
+                        COCKTAIL CLASSES
+                    </span>
+
+                    <strong
+                        id="upcomingClassesCount"
+                        class="admin-stat-number"
+                    >
+                        —
+                    </strong>
+
+                    <span class="admin-stat-description">
+                        Upcoming classes
+                    </span>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <span class="admin-stat-label">
+                        MENU ITEMS
+                    </span>
+
+                    <strong
+                        id="menuItemsCount"
+                        class="admin-stat-number"
+                    >
+                        —
+                    </strong>
+
+                    <span class="admin-stat-description">
+                        Visible items
+                    </span>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <span class="admin-stat-label">
+                        PHOTOS
+                    </span>
+
+                    <strong
+                        id="photosCount"
+                        class="admin-stat-number"
+                    >
+                        —
+                    </strong>
+
+                    <span class="admin-stat-description">
+                        Visible website photos
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Quick actions -->
+
+            <div class="admin-dashboard-grid">
+
+
+                <div class="admin-panel">
+
+                    <div class="admin-panel-heading">
+
+                        <div>
+
+                            <p class="admin-eyebrow">
+                                QUICK ACTIONS
+                            </p>
+
+                            <h3>
+                                Manage Elysium
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="admin-quick-actions">
+
+
+                        <button
+                            type="button"
+                            class="admin-quick-action"
+                            data-section="menu"
+                        >
+
+                            <span>
+                                +
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Edit Menu
+                                </strong>
+
+                                <small>
+                                    Add or update food and cocktails
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-quick-action"
+                            data-section="photos"
+                        >
+
+                            <span>
+                                +
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Manage Photos
+                                </strong>
+
+                                <small>
+                                    Update website images
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-quick-action"
+                            data-section="private-room"
+                        >
+
+                            <span>
+                                →
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Private Room Requests
+                                </strong>
+
+                                <small>
+                                    Review incoming requests
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Recent requests -->
+
+                <div class="admin-panel">
+
+                    <div class="admin-panel-heading">
+
+                        <div>
+
+                            <p class="admin-eyebrow">
+                                PRIVATE EVENTS
+                            </p>
+
+                            <h3>
+                                Recent Requests
+                            </h3>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="admin-text-button"
+                            data-section="private-room"
+                        >
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="recentRequests"
+                        class="admin-recent-requests"
+                    >
+
+                        <div class="admin-empty-state">
+
+                            <span>
+                                ◇
+                            </span>
+
+                            <p>
+                                Loading requests...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MENU SECTION
+             ================================================= -->
+
+        <section
+            id="section-menu"
+            class="admin-content-section"
+            hidden
+        >
+
+            <div class="admin-section-heading">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        CONTENT MANAGEMENT
+                    </p>
+
+                    <h2>
+                        Menu
+                    </h2>
+
+                    <p>
+                        Manage cocktails, food, categories,
+                        prices, descriptions, and menu visibility.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-gold-button"
+                    id="addMenuItemButton"
+                >
+                    + ADD ITEM
+                </button>
+
+            </div>
+
+
+            <div
+                id="menuManager"
+                class="admin-manager-container"
+            >
+
+                <div class="admin-loading">
+                    Loading menu...
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PHOTOS SECTION
+             ================================================= -->
+
+        <section
+            id="section-photos"
+            class="admin-content-section"
+            hidden
+        >
+
+            <div class="admin-section-heading">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        CONTENT MANAGEMENT
+                    </p>
+
+                    <h2>
+                        Photos
+                    </h2>
+
+                    <p>
+                        Upload and manage the images displayed
+                        throughout the Elysium website.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-gold-button"
+                    id="uploadPhotoButton"
+                >
+                    + UPLOAD PHOTO
+                </button>
+
+            </div>
+
+
+            <div
+                id="photoManager"
+                class="admin-manager-container"
+            >
+
+                <div class="admin-loading">
+                    Loading photos...
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PRIVATE ROOM SECTION
+             ================================================= -->
+
+        <section
+            id="section-private-room"
+            class="admin-content-section"
+            hidden
+        >
+
+            <div class="admin-section-heading">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        PRIVATE EVENTS
+                    </p>
+
+                    <h2>
+                        Private Room Requests
+                    </h2>
+
+                    <p>
+                        Review and manage private room requests
+                        submitted through the website.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="privateRoomManager"
+                class="admin-manager-container"
+            >
+
+                <div class="admin-loading">
+                    Loading requests...
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             COCKTAIL CLASSES
+             ================================================= -->
+
+        <section
+            id="section-cocktail-classes"
+            class="admin-content-section"
+            hidden
+        >
+
+            <div class="admin-section-heading">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        EXPERIENCES
+                    </p>
+
+                    <h2>
+                        Cocktail Classes
+                    </h2>
+
+                    <p>
+                        Manage classes, capacity, dates,
+                        and registrations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="cocktailClassManager"
+                class="admin-manager-container"
+            >
+
+                <div class="admin-loading">
+                    Loading classes...
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FAQ
+             ================================================= -->
+
+        <section
+            id="section-faq"
+            class="admin-content-section"
+            hidden
+        >
+
+            <div class="admin-section-heading">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        CONTENT MANAGEMENT
+                    </p>
+
+                    <h2>
+                        FAQ
+                    </h2>
+
+                    <p>
+                        Update frequently asked questions
+                        displayed on the website.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-gold-button"
+                    id="addFaqButton"
+                >
+                    + ADD QUESTION
+                </button>
+
+            </div>
+
+
+            <div
+                id="faqManager"
+                class="admin-manager-container"
+            >
+
+                <div class="admin-loading">
+                    Loading FAQ...
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     SUPABASE CONNECTION
+     ========================================================= -->
+
+<script
+    src="../js/supabase.js"
+></script>
+
+
+<!-- =========================================================
+     ADMIN JAVASCRIPT
+     ========================================================= -->
+
+<script
+    src="./js/admin-auth.js"
+    defer
+></script>
+
+
+<script
+    src="./js/admin.js"
+    defer
+></script>
+
+
+</body>
+
+</html>
