@@ -1,0 +1,1132 @@
+/* =========================================================
+   ELYSIUM EXPERIENCES
+   ========================================================= */
+
+
+/* =========================================================
+   EXPERIENCE HERO
+   ========================================================= */
+
+.experience-hero {
+    position: relative;
+
+    min-height: 78vh;
+    min-height: 78svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    padding: 150px 0 100px;
+
+    text-align: center;
+
+    background: var(--elysium-black);
+}
+
+.experience-hero-background {
+    position: absolute;
+    inset: 0;
+}
+
+.experience-hero-background img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        brightness(0.55)
+        saturate(0.65);
+}
+
+.experience-hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(8, 7, 6, 0.15),
+            rgba(8, 7, 6, 0.9)
+        );
+}
+
+.experience-hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(
+        calc(100% - 40px),
+        800px
+    );
+}
+
+.experience-hero-content h1 {
+    margin: 20px 0;
+
+    font-size: clamp(
+        4rem,
+        9vw,
+        8rem
+    );
+
+    font-weight: 300;
+
+    line-height: 0.95;
+}
+
+.experience-hero-content > p:not(.uppercase-label) {
+    max-width: 550px;
+
+    margin: 30px auto 35px;
+
+    color: var(--elysium-cream-soft);
+}
+
+
+/* =========================================================
+   EXPERIENCE INTRO
+   ========================================================= */
+
+.experience-intro {
+    padding: 130px 0;
+
+    background: var(--elysium-black);
+}
+
+.experience-intro-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 100px;
+
+    align-items: center;
+}
+
+.experience-intro-content {
+    max-width: 600px;
+}
+
+.experience-intro-content h2 {
+    margin: 20px 0 30px;
+
+    font-size: clamp(
+        3.5rem,
+        6vw,
+        6rem
+    );
+}
+
+.experience-intro-content p:not(.uppercase-label) {
+    margin-bottom: 20px;
+
+    color: var(--elysium-cream-soft);
+}
+
+.experience-intro-details {
+    border-top: 1px solid var(--border-light);
+}
+
+.experience-detail {
+    display: flex;
+
+    gap: 30px;
+
+    padding: 30px 0;
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+.experience-detail-number {
+    color: var(--elysium-gold);
+
+    font-family: var(--font-display);
+
+    font-size: 1.3rem;
+}
+
+.experience-detail h3 {
+    margin-bottom: 8px;
+
+    font-size: 1.7rem;
+}
+
+.experience-detail p {
+    color: var(--elysium-muted);
+
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   UPCOMING CLASSES
+   ========================================================= */
+
+.upcoming-classes {
+    padding: 130px 0;
+
+    background: var(--elysium-dark);
+}
+
+.class-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.class-card {
+    overflow: hidden;
+
+    background: var(--elysium-black);
+
+    border: 1px solid var(--border-light);
+
+    transition:
+        transform var(--transition-medium),
+        border-color var(--transition-medium);
+}
+
+.class-card:hover {
+    transform: translateY(-6px);
+
+    border-color: var(--border-gold);
+}
+
+.class-card-image {
+    position: relative;
+
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+}
+
+.class-card-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 1s ease;
+}
+
+.class-card:hover .class-card-image img {
+    transform: scale(1.05);
+}
+
+.class-image-placeholder {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(201, 150, 74, 0.12),
+            transparent 55%
+        ),
+        var(--elysium-black);
+}
+
+.class-image-placeholder span {
+    color: var(--elysium-gold);
+
+    font-family: var(--font-display);
+
+    font-size: 1.8rem;
+
+    letter-spacing: 0.2em;
+
+    opacity: 0.5;
+}
+
+.class-card-content {
+    padding: 30px;
+}
+
+.class-date {
+    margin-bottom: 10px;
+
+    color: var(--elysium-gold);
+
+    font-size: 0.62rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+}
+
+.class-card-content h3 {
+    margin-bottom: 15px;
+
+    font-size: 2rem;
+}
+
+.class-description {
+    min-height: 70px;
+
+    margin-bottom: 20px;
+
+    color: var(--elysium-cream-soft);
+
+    font-size: 0.8rem;
+
+    line-height: 1.65;
+}
+
+.class-time {
+    margin-bottom: 25px;
+
+    color: var(--elysium-muted);
+
+    font-size: 0.7rem;
+
+    letter-spacing: 0.08em;
+}
+
+.class-card-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border-light);
+}
+
+.class-price {
+    color: var(--elysium-cream);
+
+    font-family: var(--font-display);
+
+    font-size: 1.25rem;
+}
+
+.class-availability {
+    color: var(--elysium-gold-light);
+
+    font-size: 0.62rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    text-align: right;
+}
+
+.class-availability.spots-low {
+    color: #d9a05b;
+}
+
+.class-book-button {
+    width: 100%;
+}
+
+
+/* =========================================================
+   EMPTY CLASSES
+   ========================================================= */
+
+.classes-empty {
+    max-width: 600px;
+
+    margin: 60px auto 0;
+
+    text-align: center;
+}
+
+.classes-empty h3 {
+    margin: 15px 0;
+
+    font-size: 2.5rem;
+}
+
+.classes-empty p:last-child {
+    color: var(--elysium-muted);
+}
+
+
+/* =========================================================
+   WHAT'S INCLUDED
+   ========================================================= */
+
+.class-includes {
+    padding: 130px 0;
+
+    background: var(--elysium-black);
+}
+
+.include-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 30px;
+}
+
+.include-item {
+    padding: 40px 30px;
+
+    text-align: center;
+
+    border: 1px solid var(--border-light);
+
+    transition:
+        border-color var(--transition-medium),
+        transform var(--transition-medium);
+}
+
+.include-item:hover {
+    transform: translateY(-5px);
+
+    border-color: var(--border-gold);
+}
+
+.include-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+
+    margin: 0 auto 25px;
+
+    color: var(--elysium-gold);
+
+    border: 1px solid var(--border-gold);
+
+    border-radius: 50%;
+
+    font-family: var(--font-display);
+
+    font-size: 0.8rem;
+}
+
+.include-item h3 {
+    margin-bottom: 15px;
+
+    font-size: 1.6rem;
+}
+
+.include-item p {
+    color: var(--elysium-muted);
+
+    font-size: 0.78rem;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .class-list {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .include-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .experience-intro-grid {
+        gap: 60px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .experience-hero {
+        min-height: 70vh;
+
+        padding: 130px 0 80px;
+    }
+
+    .experience-hero-content h1 {
+        font-size:
+            clamp(
+                3.8rem,
+                16vw,
+                6rem
+            );
+    }
+
+    .experience-intro {
+        padding: 90px 0;
+    }
+
+    .experience-intro-grid {
+        grid-template-columns: 1fr;
+
+        gap: 60px;
+    }
+
+    .upcoming-classes {
+        padding: 90px 0;
+    }
+
+    .class-list {
+        grid-template-columns: 1fr;
+    }
+
+    .class-card-content {
+        padding: 25px;
+    }
+
+    .class-includes {
+        padding: 90px 0;
+    }
+
+    .include-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* =========================================================
+   COCKTAIL CLASS BOOKING PAGE
+   ========================================================= */
+
+.booking-page {
+    min-height: 100vh;
+
+    padding:
+        150px 0
+        100px;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(201, 150, 74, 0.05),
+            transparent 35%
+        ),
+        var(--elysium-black);
+}
+
+.booking-back-link {
+    display: inline-block;
+
+    margin-bottom: 50px;
+
+    color: var(--elysium-muted);
+
+    font-size: 0.65rem;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    transition:
+        color var(--transition-fast);
+}
+
+.booking-back-link:hover {
+    color: var(--elysium-gold-light);
+}
+
+
+/* =========================================================
+   BOOKING LAYOUT
+   ========================================================= */
+
+.booking-layout {
+    display: grid;
+
+    grid-template-columns:
+        0.9fr 1.1fr;
+
+    gap: 80px;
+
+    max-width: 1200px;
+
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   CLASS INFORMATION
+   ========================================================= */
+
+.booking-class-info {
+    align-self: start;
+
+    background: var(--elysium-dark);
+
+    border: 1px solid var(--border-light);
+}
+
+.booking-class-image {
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+}
+
+.booking-class-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.booking-image-placeholder {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(201, 150, 74, 0.12),
+            transparent 55%
+        ),
+        var(--elysium-black);
+}
+
+.booking-image-placeholder span {
+    color: var(--elysium-gold);
+
+    font-family: var(--font-display);
+
+    font-size: 2rem;
+
+    letter-spacing: 0.2em;
+
+    opacity: 0.5;
+}
+
+.booking-class-details {
+    padding: 35px;
+}
+
+.booking-class-details h1 {
+    margin: 10px 0 20px;
+
+    font-size: clamp(
+        2.5rem,
+        5vw,
+        4.5rem
+    );
+
+    line-height: 1;
+}
+
+.booking-class-description {
+    margin-bottom: 30px;
+
+    color: var(--elysium-cream-soft);
+
+    font-size: 0.85rem;
+
+    line-height: 1.7;
+}
+
+.booking-class-meta {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid var(--border-light);
+}
+
+.booking-class-meta div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.booking-class-meta span {
+    color: var(--elysium-muted);
+
+    font-size: 0.55rem;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+.booking-class-meta strong {
+    color: var(--elysium-cream);
+
+    font-family: var(--font-display);
+
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.booking-form-section {
+    padding: 45px;
+
+    background: var(--elysium-dark);
+
+    border: 1px solid var(--border-light);
+}
+
+.booking-form-heading {
+    margin-bottom: 40px;
+}
+
+.booking-form-heading h2 {
+    margin: 15px 0;
+
+    font-size: clamp(
+        3rem,
+        5vw,
+        5rem
+    );
+}
+
+.booking-form-heading p:last-child {
+    color: var(--elysium-muted);
+
+    font-size: 0.8rem;
+}
+
+.booking-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.form-label {
+    color: var(--elysium-cream);
+
+    font-size: 0.65rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+.form-label span {
+    color: var(--elysium-muted);
+
+    font-size: 0.55rem;
+
+    margin-left: 5px;
+}
+
+.form-input {
+    width: 100%;
+
+    padding:
+        15px 16px;
+
+    background: var(--elysium-black);
+
+    color: var(--elysium-cream);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 0;
+
+    outline: none;
+
+    font-family: var(--font-body);
+
+    font-size: 0.8rem;
+
+    transition:
+        border-color var(--transition-fast);
+}
+
+.form-input:focus {
+    border-color: var(--elysium-gold);
+}
+
+.form-input::placeholder {
+    color: var(--elysium-muted);
+}
+
+.form-textarea {
+    resize: vertical;
+
+    min-height: 110px;
+}
+
+.form-help {
+    color: var(--elysium-muted);
+
+    font-size: 0.65rem;
+}
+
+
+/* =========================================================
+   TOTAL
+   ========================================================= */
+
+.booking-total {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        20px 0;
+
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.booking-total span {
+    color: var(--elysium-muted);
+
+    font-size: 0.65rem;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+.booking-total strong {
+    color: var(--elysium-gold-light);
+
+    font-family: var(--font-display);
+
+    font-size: 1.7rem;
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.booking-submit {
+    width: 100%;
+}
+
+.booking-submit:disabled {
+    cursor: wait;
+
+    opacity: 0.6;
+}
+
+.booking-disclaimer {
+    color: var(--elysium-muted);
+
+    font-size: 0.6rem;
+
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.booking-form-error {
+    padding: 15px;
+
+    color: #e4b0a5;
+
+    background: rgba(
+        120,
+        40,
+        30,
+        0.12
+    );
+
+    border: 1px solid rgba(
+        180,
+        80,
+        65,
+        0.3
+    );
+
+    font-size: 0.72rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.booking-loading {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 400px;
+
+    color: var(--elysium-muted);
+
+    text-align: center;
+}
+
+.booking-loading-spinner {
+    width: 35px;
+    height: 35px;
+
+    margin-bottom: 20px;
+
+    border:
+        1px solid
+        rgba(
+            201,
+            150,
+            74,
+            0.2
+        );
+
+    border-top-color:
+        var(--elysium-gold);
+
+    border-radius: 50%;
+
+    animation:
+        bookingSpinner
+        0.8s linear infinite;
+}
+
+@keyframes bookingSpinner {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   SUCCESS / UNAVAILABLE
+   ========================================================= */
+
+.booking-success,
+.booking-unavailable {
+    max-width: 700px;
+
+    margin: 80px auto;
+
+    text-align: center;
+}
+
+.booking-success-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+
+    margin:
+        0 auto
+        30px;
+
+    color: var(--elysium-gold);
+
+    border:
+        1px solid
+        var(--elysium-gold);
+
+    border-radius: 50%;
+
+    font-size: 1.5rem;
+}
+
+.booking-success h1,
+.booking-unavailable h1 {
+    margin: 20px 0 25px;
+
+    font-size: clamp(
+        3.5rem,
+        7vw,
+        6rem
+    );
+}
+
+.booking-success > p:not(.uppercase-label),
+.booking-unavailable > p:not(.uppercase-label) {
+    max-width: 550px;
+
+    margin:
+        0 auto 35px;
+
+    color: var(--elysium-cream-soft);
+
+    font-size: 0.85rem;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .booking-layout {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .booking-page {
+        padding:
+            120px 0
+            70px;
+    }
+
+    .booking-form-section {
+        padding: 30px 22px;
+    }
+
+    .booking-class-details {
+        padding: 28px 22px;
+    }
+
+    .booking-class-meta {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================================
+   ELYSIUM SELECT DROPDOWN
+   ========================================================= */
+
+.form-input[type="select"],
+select.form-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-color: var(--elysium-black);
+    color: var(--elysium-cream);
+
+    border: 1px solid var(--border-light);
+
+    cursor: pointer;
+
+    /* Custom gold dropdown arrow */
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            var(--elysium-gold) 50%
+        ),
+        linear-gradient(
+            135deg,
+            var(--elysium-gold) 50%,
+            transparent 50%
+        );
+
+    background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 12px) 50%;
+
+    background-size:
+        6px 6px,
+        6px 6px;
+
+    background-repeat: no-repeat;
+
+    padding-right: 45px;
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+
+/* Hover */
+
+select.form-input:hover {
+    border-color: var(--elysium-gold);
+}
+
+
+/* Focus */
+
+select.form-input:focus {
+    border-color: var(--elysium-gold);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(201, 150, 74, 0.15);
+}
+
+
+/* Dropdown options */
+
+select.form-input option {
+    background-color: var(--elysium-black);
+
+    color: var(--elysium-cream);
+
+    padding: 12px;
+}
+
+
+/* Placeholder option */
+
+select.form-input option[value=""] {
+    color: var(--elysium-muted);
+}

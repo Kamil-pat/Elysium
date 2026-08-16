@@ -1,0 +1,1112 @@
+
+/* =========================================================
+   ELYSIUM COCKTAIL LOUNGE
+   GLOBAL DESIGN SYSTEM
+   ========================================================= */
+
+/* =========================================================
+   1. FONTS
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+
+/* =========================================================
+   2. ELYSIUM DESIGN VARIABLES
+   ========================================================= */
+
+:root {
+
+    /* ---------- Colors ---------- */
+
+    --elysium-black: #080706;
+    --elysium-black-soft: #0d0b09;
+    --elysium-dark: #13100d;
+    --elysium-brown: #21160f;
+    --elysium-brown-light: #332218;
+
+    --elysium-gold: #c9964a;
+    --elysium-gold-light: #e1b56a;
+    --elysium-gold-dark: #9b6d2f;
+
+    --elysium-cream: #f2e9da;
+    --elysium-cream-soft: #ded3c1;
+    --elysium-muted: #a99d8d;
+
+    --elysium-white: #ffffff;
+
+    /* ---------- Typography ---------- */
+
+    --font-display: "Cormorant Garamond", Georgia, serif;
+    --font-body: "Inter", Arial, sans-serif;
+
+    /* ---------- Layout ---------- */
+
+    --content-width: 1400px;
+    --content-width-narrow: 1000px;
+
+    --section-padding: 120px;
+    --section-padding-mobile: 80px;
+
+    /* ---------- Borders ---------- */
+
+    --border-gold: rgba(201, 150, 74, 0.45);
+    --border-light: rgba(242, 233, 218, 0.15);
+
+    /* ---------- Effects ---------- */
+
+    --gold-glow: 0 0 35px rgba(201, 150, 74, 0.12);
+
+    --shadow-soft: 0 15px 50px rgba(0, 0, 0, 0.35);
+    --shadow-heavy: 0 25px 80px rgba(0, 0, 0, 0.55);
+
+    /* ---------- Transitions ---------- */
+
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.4s ease;
+    --transition-slow: 0.7s ease;
+}
+
+
+/* =========================================================
+   3. RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: var(--elysium-black);
+}
+
+body {
+    background: var(--elysium-black);
+    color: var(--elysium-cream);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+    font-family: var(--font-body);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+
+/* =========================================================
+   4. TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--elysium-cream);
+}
+
+h1 {
+    font-size: clamp(4rem, 9vw, 9rem);
+    letter-spacing: 0.04em;
+}
+
+h2 {
+    font-size: clamp(3rem, 6vw, 6rem);
+    letter-spacing: 0.02em;
+}
+
+h3 {
+    font-size: clamp(2rem, 3vw, 3.2rem);
+}
+
+h4 {
+    font-size: 2rem;
+}
+
+p {
+    color: var(--elysium-cream-soft);
+}
+
+.display-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+.uppercase-label {
+    color: var(--elysium-gold-light);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+}
+
+.gold-text {
+    color: var(--elysium-gold-light);
+}
+
+
+/* =========================================================
+   5. GLOBAL LAYOUT
+   ========================================================= */
+
+.container {
+    width: min(
+        calc(100% - 80px),
+        var(--content-width)
+    );
+    margin-inline: auto;
+}
+
+.container-narrow {
+    width: min(
+        calc(100% - 80px),
+        var(--content-width-narrow)
+    );
+    margin-inline: auto;
+}
+
+.section {
+    position: relative;
+    padding: var(--section-padding) 0;
+}
+
+.section-dark {
+    background: var(--elysium-black);
+}
+
+.section-brown {
+    background: var(--elysium-dark);
+}
+
+
+/* =========================================================
+   6. SECTION INTRO
+   ========================================================= */
+
+.section-intro {
+    max-width: 800px;
+    margin-bottom: 70px;
+}
+
+.section-intro.center {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.section-intro .eyebrow {
+    margin-bottom: 20px;
+}
+
+.section-intro h2 {
+    margin-bottom: 25px;
+}
+
+.section-intro p {
+    max-width: 650px;
+    font-size: 1rem;
+}
+
+.section-intro.center p {
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   7. DECORATIVE GOLD LINE
+   ========================================================= */
+
+.gold-line {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    max-width: 500px;
+    margin: 30px 0;
+}
+
+.gold-line::before,
+.gold-line::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: var(--border-gold);
+}
+
+.gold-line-symbol {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--elysium-gold);
+    transform: rotate(45deg);
+}
+
+.gold-line.center {
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   8. BUTTONS
+   ========================================================= */
+
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 32px;
+
+    border: 1px solid var(--elysium-gold);
+
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+
+    transition:
+        background var(--transition-medium),
+        color var(--transition-medium),
+        box-shadow var(--transition-medium),
+        transform var(--transition-medium);
+}
+
+.btn-primary {
+    background: var(--elysium-gold);
+    color: var(--elysium-black);
+}
+
+.btn-primary:hover {
+    background: var(--elysium-gold-light);
+    box-shadow: var(--gold-glow);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--elysium-gold-light);
+}
+
+.btn-outline:hover {
+    background: var(--elysium-gold);
+    color: var(--elysium-black);
+    box-shadow: var(--gold-glow);
+    transform: translateY(-2px);
+}
+
+.btn-cream {
+    background: var(--elysium-cream);
+    border-color: var(--elysium-cream);
+    color: var(--elysium-black);
+}
+
+.btn-cream:hover {
+    background: var(--elysium-white);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   9. NAVIGATION
+   ========================================================= */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background: transparent;
+
+    transition:
+        background var(--transition-medium),
+        backdrop-filter var(--transition-medium),
+        border-color var(--transition-medium);
+}
+
+.site-header.scrolled {
+    background: rgba(8, 7, 6, 0.88);
+    border-bottom: 1px solid rgba(201, 150, 74, 0.15);
+    backdrop-filter: blur(15px);
+}
+
+.navbar {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    min-height: 95px;
+
+    width: min(
+        calc(100% - 80px),
+        var(--content-width)
+    );
+
+    margin-inline: auto;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links-right {
+    justify-content: flex-end;
+}
+
+.nav-link {
+    position: relative;
+
+    color: var(--elysium-cream-soft);
+
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+
+    transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+    content: "";
+
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--elysium-gold);
+
+    transition: width var(--transition-medium);
+}
+
+.nav-link:hover {
+    color: var(--elysium-gold-light);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--elysium-gold-light);
+
+    text-align: center;
+}
+
+.nav-logo img {
+    width: 55px;
+    margin-bottom: 5px;
+}
+
+.nav-logo-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.18em;
+}
+
+.nav-logo-subtitle {
+    margin-top: 1px;
+
+    font-size: 0.45rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+}
+
+.nav-reserve {
+    margin-left: 10px;
+}
+
+
+/* =========================================================
+   10. MOBILE NAVIGATION
+   ========================================================= */
+
+.mobile-menu-button {
+    display: none;
+
+    width: 45px;
+    height: 45px;
+
+    background: transparent;
+    color: var(--elysium-cream);
+
+    border: 1px solid var(--border-gold);
+}
+
+.mobile-menu-button span {
+    display: block;
+
+    width: 20px;
+    height: 1px;
+
+    margin: 5px auto;
+
+    background: currentColor;
+
+    transition: transform var(--transition-medium);
+}
+
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(8, 7, 6, 0.98);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity var(--transition-medium),
+        visibility var(--transition-medium);
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+    text-align: center;
+}
+
+.mobile-menu-link {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    color: var(--elysium-cream);
+
+    transition: color var(--transition-fast);
+}
+
+.mobile-menu-link:hover {
+    color: var(--elysium-gold-light);
+}
+
+
+/* =========================================================
+   11. HERO FOUNDATION
+   ========================================================= */
+
+.hero {
+    position: relative;
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: var(--elysium-black);
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(8, 7, 6, 0.25),
+            rgba(8, 7, 6, 0.55)
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(
+        calc(100% - 40px),
+        1000px
+    );
+
+    text-align: center;
+}
+
+.hero-eyebrow {
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    color: var(--elysium-cream);
+
+    text-shadow:
+        0 5px 30px rgba(0, 0, 0, 0.6);
+}
+
+.hero-subtitle {
+    margin-top: 25px;
+
+    color: var(--elysium-gold-light);
+
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   12. IMAGE TREATMENTS
+   ========================================================= */
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 1s ease;
+}
+
+.image-container:hover img {
+    transform: scale(1.04);
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(8, 7, 6, 0.7),
+            transparent 60%
+        );
+}
+
+
+/* =========================================================
+   13. CARDS
+   ========================================================= */
+
+.card {
+    position: relative;
+
+    background: var(--elysium-dark);
+
+    border: 1px solid var(--border-light);
+
+    transition:
+        border-color var(--transition-medium),
+        transform var(--transition-medium),
+        box-shadow var(--transition-medium);
+}
+
+.card:hover {
+    border-color: var(--border-gold);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   14. FORMS
+   ========================================================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    color: var(--elysium-gold-light);
+
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid var(--border-light);
+
+    color: var(--elysium-cream);
+
+    font-size: 0.9rem;
+
+    outline: none;
+
+    transition:
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--elysium-muted);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    background: rgba(201, 150, 74, 0.04);
+    border-color: var(--elysium-gold);
+}
+
+.form-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+
+/* =========================================================
+   15. DECORATIVE GREEK ELEMENTS
+   ========================================================= */
+
+.greek-border {
+    position: relative;
+}
+
+.greek-border::before,
+.greek-border::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            var(--elysium-gold) 0,
+            var(--elysium-gold) 8px,
+            transparent 8px,
+            transparent 16px
+        );
+
+    opacity: 0.4;
+}
+
+.greek-border::before {
+    top: 0;
+}
+
+.greek-border::after {
+    bottom: 0;
+}
+
+
+/* =========================================================
+   16. MODAL FOUNDATION
+   ========================================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity var(--transition-medium),
+        visibility var(--transition-medium);
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+
+    width: min(100%, 650px);
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 50px;
+
+    background: var(--elysium-dark);
+
+    border: 1px solid var(--border-gold);
+
+    box-shadow: var(--shadow-heavy);
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    width: 40px;
+    height: 40px;
+
+    background: transparent;
+
+    color: var(--elysium-cream);
+
+    font-size: 1.5rem;
+}
+
+.modal-close:hover {
+    color: var(--elysium-gold-light);
+}
+
+
+/* =========================================================
+   17. SCROLL REVEAL
+   ========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+    transition-delay: 0.4s;
+}
+
+
+/* =========================================================
+   18. UTILITY CLASSES
+   ========================================================= */
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.gold {
+    color: var(--elysium-gold-light);
+}
+
+.muted {
+    color: var(--elysium-muted);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   19. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    :root {
+        --section-padding: 90px;
+    }
+
+    .container,
+    .container-narrow {
+        width: min(
+            calc(100% - 50px),
+            var(--content-width)
+        );
+    }
+
+    .navbar {
+        width: calc(100% - 50px);
+    }
+
+    .nav-links {
+        gap: 18px;
+    }
+
+    .nav-link {
+        font-size: 0.58rem;
+    }
+
+    .nav-logo-name {
+        font-size: 1.3rem;
+    }
+
+    .nav-reserve {
+        padding-inline: 20px;
+    }
+}
+
+
+/* =========================================================
+   20. RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    :root {
+        --section-padding: var(--section-padding-mobile);
+    }
+
+    body {
+        font-size: 15px;
+    }
+
+    .container,
+    .container-narrow {
+        width: calc(100% - 40px);
+    }
+
+    /* Navigation */
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+
+        width: calc(100% - 40px);
+        min-height: 80px;
+    }
+
+    .nav-links,
+    .nav-reserve {
+        display: none;
+    }
+
+    .nav-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .nav-logo img {
+        width: 42px;
+    }
+
+    .nav-logo-name {
+        font-size: 1.15rem;
+    }
+
+    .nav-logo-subtitle {
+        font-size: 0.38rem;
+    }
+
+    .mobile-menu-button {
+        display: block;
+        margin-left: auto;
+    }
+
+    /* Hero */
+
+    .hero-content {
+        width: calc(100% - 40px);
+    }
+
+    .hero-title {
+        font-size: clamp(3.5rem, 18vw, 6rem);
+    }
+
+    .hero-subtitle {
+        font-size: 0.6rem;
+        letter-spacing: 0.28em;
+    }
+
+    /* Typography */
+
+    h2 {
+        font-size: clamp(2.7rem, 13vw, 4.5rem);
+    }
+
+    h3 {
+        font-size: 2.3rem;
+    }
+
+    /* Buttons */
+
+    .btn {
+        width: 100%;
+        min-height: 55px;
+    }
+
+    /* Section intro */
+
+    .section-intro {
+        margin-bottom: 50px;
+    }
+
+    /* Modal */
+
+    .modal {
+        padding: 15px;
+    }
+
+    .modal-content {
+        padding: 35px 25px;
+    }
+
+    /* Gold line */
+
+    .gold-line {
+        margin: 25px 0;
+    }
+}
+
+
+/* =========================================================
+   21. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* =========================================================
+   MOBILE MENU BUTTON — ACTIVE STATE
+   ========================================================= */
+
+.mobile-menu-button.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.mobile-menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-button.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
