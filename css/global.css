@@ -375,6 +375,29 @@ p {
     backdrop-filter: blur(15px);
 }
 
+/* Mirror styles for sight-header so swapping classes doesn't break layout */
+.sight-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background: transparent;
+
+    transition:
+        background var(--transition-medium),
+        backdrop-filter var(--transition-medium),
+        border-color var(--transition-medium);
+}
+
+.sight-header.scrolled {
+    background: rgba(8, 7, 6, 0.88);
+    border-bottom: 1px solid rgba(201, 150, 74, 0.15);
+    backdrop-filter: blur(15px);
+}
+
 .navbar {
     position: relative;
 

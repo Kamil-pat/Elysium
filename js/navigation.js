@@ -26,9 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const handleScroll = () => {
 
         if (window.scrollY > 50) {
-            header.classList.add("scrolled");
+            // Swap `site-header` to `sight-header` and add scrolled state
+            if (header.classList.contains("site-header")) {
+                header.classList.remove("site-header");
+            }
+            header.classList.add("sight-header", "scrolled");
         } else {
-            header.classList.remove("scrolled");
+            // Revert back to `site-header` when at top
+            if (header.classList.contains("sight-header")) {
+                header.classList.remove("sight-header", "scrolled");
+            }
+            header.classList.add("site-header");
         }
 
     };
