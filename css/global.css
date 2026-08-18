@@ -222,6 +222,134 @@ p {
 
 
 /* =========================================================
+   SITE FOOTER
+   ========================================================= */
+
+.site-footer {
+    padding: 90px 0 30px;
+    background: #050403;
+    border-top: 1px solid rgba(201, 150, 74, 0.15);
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 60px;
+    padding-bottom: 70px;
+}
+
+.footer-brand {
+    max-width: 300px;
+}
+
+.footer-logo {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: var(--elysium-gold-light);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    letter-spacing: 0.15em;
+}
+
+.footer-brand p {
+    font-size: 0.85rem;
+}
+
+.footer-location {
+    margin-top: 10px;
+    color: var(--elysium-muted);
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.footer-column .uppercase-label {
+    margin-bottom: 10px;
+}
+
+.footer-column a {
+    color: var(--elysium-muted);
+    font-size: 0.75rem;
+    transition: color var(--transition-fast);
+}
+
+.footer-column a:hover,
+.footer-social a:hover {
+    color: var(--elysium-gold-light);
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 25px;
+    border-top: 1px solid rgba(242, 233, 218, 0.08);
+}
+
+.footer-bottom p {
+    color: #766f65;
+    font-size: 0.65rem;
+}
+
+.footer-social a {
+    color: var(--elysium-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color var(--transition-fast);
+}
+
+@media (max-width: 1000px) {
+
+    .footer-main {
+        gap: 40px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .site-footer {
+        padding-top: 70px;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 45px 25px;
+    }
+
+    .footer-brand {
+        grid-column: span 2;
+        max-width: none;
+        padding-bottom: 15px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+
+}
+
+
+/* =========================================================
    6. SECTION INTRO
    ========================================================= */
 

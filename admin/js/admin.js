@@ -703,9 +703,7 @@ async function loadRecentRequests() {
 
 
     if (!container) {
-
         return;
-
     }
 
 
@@ -719,18 +717,20 @@ async function loadRecentRequests() {
                 .from(
                     "private_room_bookings"
                 )
-                .select(
-                    `
+                .select(`
                     id,
-                    request_number,
                     customer_name,
-                    requested_date,
-                    preferred_start_time,
                     guest_count,
                     status,
-                    created_at
-                    `
-                )
+                    created_at,
+                    preferred_start_time,
+                    preferred_end_time,
+
+                    private_room_slots (
+                        reservation_date,
+                        title
+                    )
+                `)
                 .order(
                     "created_at",
                     {
@@ -741,18 +741,7 @@ async function loadRecentRequests() {
 
 
         if (error) {
-
-            console.error(
-                "Recent request error:",
-                error
-            );
-
-            renderRecentRequestError(
-                container
-            );
-
-            return;
-
+            throw error;
         }
 
 
@@ -769,9 +758,10 @@ async function loadRecentRequests() {
     } catch (error) {
 
         console.error(
-            "Recent request exception:",
+            "Recent private room request error:",
             error
         );
+
 
         renderRecentRequestError(
             container
@@ -791,12 +781,9 @@ function renderRecentRequests(
     requests
 ) {
 
-    if (
-        !requests.length
-    ) {
+    if (!requests.length) {
 
         container.innerHTML = `
-
             <div class="admin-empty-state">
 
                 <span>◇</span>
@@ -806,7 +793,6 @@ function renderRecentRequests(
                 </p>
 
             </div>
-
         `;
 
         return;
@@ -819,14 +805,29 @@ function renderRecentRequests(
             .map(
                 (request) => {
 
+                    const slot =
+                        request.private_room_slots ||
+                        {};
+
+
                     const status =
                         request.status ||
                         "pending";
 
 
                     const date =
-                        formatDate(
-                            request.requested_date
+                        formatPrivateRoomDashboardDate(
+                            slot.reservation_date
+                        );
+
+                    const startTime =
+                        formatPrivateRoomTime(
+                            request.preferred_start_time
+                        );
+
+                    const endTime =
+                        formatPrivateRoomTime(
+                            request.preferred_end_time
                         );
 
 
@@ -839,39 +840,43 @@ function renderRecentRequests(
                             <div>
 
                                 <strong>
-                                    ${
-                                        escapeHtml(
-                                            request.request_number ||
-                                            request.customer_name ||
-                                            "Request"
-                                        )
-                                    }
+                                    ${escapeHtml(
+                                        request.customer_name ||
+                                        "Private Room Request"
+                                    )}
                                 </strong>
 
                                 <span>
                                     ${
-                                        escapeHtml(
-                                            request.customer_name ||
-                                            ""
-                                        )
+                                        slot.title
+                                            ? escapeHtml(
+                                                slot.title
+                                            )
+                                            : "Private Room"
                                     }
                                 </span>
 
                             </div>
 
 
-                            <div
-                                class="admin-request-details"
-                            >
+                            <div class="admin-request-details">
 
                                 <span>
                                     ${date}
                                 </span>
 
                                 <span>
+                                    ${startTime}
                                     ${
-                                        request.guest_count ||
-                                        0
+                                        endTime
+                                            ? ` – ${endTime}`
+                                            : ""
+                                    }
+                                </span>
+
+                                <span>
+                                    ${
+                                        request.guest_count || 0
                                     }
                                     guests
                                 </span>
@@ -882,14 +887,14 @@ function renderRecentRequests(
                             <span
                                 class="
                                     admin-status
-                                    ${escapeHtml(status)}
+                                    ${escapeHtml(
+                                        status
+                                    )}
                                 "
                             >
-                                ${
-                                    escapeHtml(
-                                        status
-                                    )
-                                }
+                                ${escapeHtml(
+                                    status
+                                )}
                             </span>
 
                         </div>
@@ -900,9 +905,109 @@ function renderRecentRequests(
             )
             .join("");
 
+}
+
+/* =========================================================
+   DASHBOARD DATE FORMAT
+   ========================================================= */
+
+function formatPrivateRoomDashboardDate(
+    value
+) {
+
+    if (!value) {
+        return "Date unavailable";
+    }
+
+
+    const date =
+        new Date(
+            `${value}T00:00:00`
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+
+    return date.toLocaleDateString(
+        undefined,
+        {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        }
+    );
 
 }
 
+
+/* =========================================================
+   DASHBOARD TIME FORMAT
+   ========================================================= */
+
+function formatPrivateRoomDashboardTime(
+    value
+) {
+
+    if (!value) {
+        return "";
+    }
+
+
+    const parts =
+        value.split(":");
+
+
+    if (
+        parts.length < 2
+    ) {
+
+        return value;
+
+    }
+
+
+    const hours =
+        Number(
+            parts[0]
+        );
+
+
+    const minutes =
+        parts[1];
+
+
+    if (
+        Number.isNaN(hours)
+    ) {
+
+        return value;
+
+    }
+
+
+    const suffix =
+        hours >= 12
+            ? "PM"
+            : "AM";
+
+
+    const displayHour =
+        hours % 12 ||
+        12;
+
+
+    return `${displayHour}:${minutes} ${suffix}`;
+
+}
 
 /* =========================================================
    REQUEST ERROR
@@ -1339,36 +1444,7 @@ async function loadPhotoManager() {
 
 
 
-async function loadPrivateRoomManager() {
 
-    const container =
-        document.getElementById(
-            "privateRoomManager"
-        );
-
-
-    if (!container) {
-
-        return;
-
-    }
-
-
-    container.innerHTML = `
-
-        <div class="admin-empty-state">
-
-            <span>◇</span>
-
-            <p>
-                Private room management will be connected next.
-            </p>
-
-        </div>
-
-    `;
-
-}
 
 
 async function loadCocktailClassManager() {

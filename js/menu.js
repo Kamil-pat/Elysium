@@ -420,21 +420,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       5. CREATE SIMPLE MENU ITEM
-       ===================================================== */
+    5. CREATE SIMPLE MENU ITEM
+    ===================================================== */
 
     function createSimpleMenuItem(
         drink,
         index
     ) {
-
         const article =
             document.createElement("article");
 
-
         article.className =
             "simple-menu-item reveal";
-
 
         addRevealDelay(
             article,
@@ -442,48 +439,79 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+        /* ---------- Information ---------- */
+
         const information =
             document.createElement("div");
 
+        information.className =
+            "simple-menu-item-information";
+
+
+        /* ---------- Drink Name ---------- */
 
         const name =
             document.createElement("h3");
 
         name.textContent =
-            drink.name;
-
-
-        const description =
-            document.createElement("p");
-
-        /*
-         * For simple menu items we display ingredients
-         * as the smaller descriptive text.
-         */
-
-        description.textContent =
-            drink.ingredients ||
-            drink.description ||
-            "";
-
+            drink.name || "";
 
         information.appendChild(
             name
         );
 
-        information.appendChild(
-            description
-        );
 
+        /* ---------- Description ---------- */
+
+        if (drink.description) {
+            const description =
+                document.createElement("p");
+
+            description.className =
+                "simple-menu-description";
+
+            description.textContent =
+                drink.description;
+
+            information.appendChild(
+                description
+            );
+        }
+
+
+        /* ---------- Ingredients ---------- */
+
+        if (drink.ingredients) {
+            const ingredients =
+                document.createElement("p");
+
+            ingredients.className =
+                "simple-menu-ingredients";
+
+            ingredients.textContent =
+                drink.ingredients;
+
+            information.appendChild(
+                ingredients
+            );
+        }
+
+
+        /* ---------- Price ---------- */
 
         const price =
             document.createElement("span");
+
+        price.className =
+            "drink-price";
 
         price.textContent =
             formatPrice(
                 drink.price
             );
 
+
+        /* ---------- Build Item ---------- */
 
         article.appendChild(
             information
@@ -495,7 +523,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         return article;
-
     }
 
 
@@ -573,23 +600,27 @@ document.addEventListener("DOMContentLoaded", () => {
         container,
         category
     ) {
-
         container.className =
             "database-menu-container";
 
+        const categoryNames = {
+            signature: "Signature Cocktails",
+            classics: "Classics",
+            "spirit-forward": "Spirit Forward",
+            wine: "Wine",
+            beer: "Beer",
+            "zero-proof": "Zero Proof"
+        };
 
         const readableCategory =
-            category
-                .replace("-", " ");
-
+            categoryNames[category] ||
+            category;
 
         container.innerHTML = `
             <div class="menu-empty">
 
                 <h3>
-                    ${capitalize(
-                        readableCategory
-                    )}
+                    ${readableCategory}
                     coming soon.
                 </h3>
 
@@ -600,7 +631,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             </div>
         `;
-
     }
 
 
