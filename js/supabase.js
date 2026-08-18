@@ -22,8 +22,3 @@ window.supabaseClient =
         SUPABASE_URL,
         SUPABASE_PUBLISHABLE_KEY
     );
-
-    console.log(
-    "Elysium Supabase client:",
-    window.supabaseClient
-);

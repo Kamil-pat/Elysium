@@ -111,11 +111,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 loginPassword.value;
 
 
-            console.log(
-                "Login email:",
-                email
-            );
-
 
             if (!email || !password) {
 
