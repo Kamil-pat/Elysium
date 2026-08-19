@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById("site-header");
     const mobileMenuButton = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
+    const mobileMenuClose = document.getElementById("mobile-menu-close");
 
     /*
      * Make sure the required navigation elements exist.
@@ -116,6 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
         "click",
         toggleMobileMenu
     );
+
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener(
+            "click",
+            closeMobileMenu
+        );
+    }
 
 
     /* =====================================================

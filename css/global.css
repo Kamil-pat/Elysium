@@ -1261,3 +1261,552 @@ p {
 .mobile-menu-button.active span:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
 }
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.mobile-menu {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    background:
+        rgba(
+            5,
+            4,
+            3,
+            0.96
+        );
+
+    backdrop-filter:
+        blur(16px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+.mobile-menu.active {
+    visibility: visible;
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   INNER
+   ========================================================= */
+
+.mobile-menu-inner {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    padding:
+        28px 24px 22px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SCROLLABLE NAVIGATION
+   ========================================================= */
+
+.mobile-menu-links {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 18px;
+
+    /*
+     * This is the important part.
+     */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /*
+     * Keep the links from getting
+     * compressed to fit the screen.
+     */
+    padding-right: 8px;
+    padding-bottom: 20px;
+
+    box-sizing: border-box;
+
+    /*
+     * Allows normal touch scrolling
+     * inside the menu.
+     */
+    -webkit-overflow-scrolling: touch;
+
+    overscroll-behavior-y: contain;
+
+    scroll-behavior: smooth;
+
+    /*
+     * Firefox scrollbar.
+     */
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(201, 150, 74, 0.45)
+        transparent;
+}
+
+
+/* =========================================================
+   CHROME / EDGE / SAFARI SCROLLBAR
+   ========================================================= */
+
+.mobile-menu-links::-webkit-scrollbar {
+    width: 4px;
+}
+
+
+.mobile-menu-links::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.mobile-menu-links::-webkit-scrollbar-thumb {
+    background:
+        rgba(201, 150, 74, 0.45);
+
+    border-radius: 10px;
+}
+
+
+.mobile-menu-links::-webkit-scrollbar-thumb:hover {
+    background:
+        rgba(201, 150, 74, 0.7);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.mobile-menu-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom:
+        24px;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+}
+
+
+.mobile-menu-eyebrow {
+    color:
+        #c9964a;
+
+    font-size:
+        10px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.28em;
+}
+
+
+.mobile-menu-close {
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.14
+        );
+
+    border-radius:
+        50%;
+
+    background:
+        transparent;
+
+    color:
+        rgba(
+            243,
+            238,
+            229,
+            0.8
+        );
+
+    font-size:
+        28px;
+
+    font-weight:
+        300;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.mobile-menu-close:hover {
+    color:
+        #c9964a;
+
+    border-color:
+        rgba(
+            201,
+            150,
+            74,
+            0.6
+        );
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.mobile-menu-links {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    margin-top:
+        18px;
+}
+
+
+.mobile-menu-link {
+    text-decoration:
+        none;
+}
+
+
+.mobile-menu-primary {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        15px 0;
+
+    color:
+        #f3eee5;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        22px;
+
+    font-weight:
+        400;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+
+.mobile-menu-primary:hover {
+    padding-left:
+        7px;
+
+    color:
+        #c9964a;
+}
+
+
+.mobile-menu-arrow {
+    color:
+        #c9964a;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        18px;
+
+    opacity:
+        0.7;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.mobile-menu-primary:hover
+.mobile-menu-arrow {
+    transform:
+        translateX(5px);
+}
+
+
+/* =========================================================
+   SECONDARY
+   ========================================================= */
+
+.mobile-menu-secondary {
+    padding:
+        22px 0;
+
+}
+
+
+.mobile-menu-secondary-link {
+    color:
+        rgba(
+            243,
+            238,
+            229,
+            0.5
+        );
+
+    font-size:
+        10px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.11em;
+
+    line-height:
+        1.6;
+
+    text-transform:
+        uppercase;
+
+    text-decoration:
+        none;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.mobile-menu-secondary-link:hover {
+    color:
+        #c9964a;
+}
+
+
+/* =========================================================
+   BOOKING CTA
+   ========================================================= */
+
+.mobile-menu-cta {
+    margin-top:
+        auto;
+
+    padding-top:
+        22px;
+}
+
+
+.mobile-menu-cta p {
+    margin:
+        0 0 12px;
+
+    color:
+        rgba(
+            243,
+            238,
+            229,
+            0.42
+        );
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        13px;
+
+    font-style:
+        italic;
+}
+
+
+.mobile-menu-book-button {
+    width:
+        100%;
+
+    box-sizing:
+        border-box;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        16px 18px;
+
+    color:
+        #0b0907;
+
+    background:
+        #c9964a;
+
+    border:
+        1px solid
+        #c9964a;
+
+    text-decoration:
+        none;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.mobile-menu-book-button:hover {
+    background:
+        #ddb16d;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.mobile-menu-book-button span:last-child {
+    font-size:
+        18px;
+
+    line-height:
+        1;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.mobile-menu-footer {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding-top:
+        18px;
+
+    color:
+        rgba(
+            243,
+            238,
+            229,
+            0.3
+        );
+
+    font-size:
+        8px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
+}
