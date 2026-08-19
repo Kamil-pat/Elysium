@@ -1488,32 +1488,20 @@ async function loadCocktailClassManager() {
 
 async function loadFaqManager() {
 
-    const container =
-        document.getElementById(
-            "faqManager"
+    if (
+        typeof loadAdminFAQs !== "function"
+    ) {
+
+        console.error(
+            "FAQ manager is not loaded."
         );
-
-
-    if (!container) {
 
         return;
 
     }
 
 
-    container.innerHTML = `
-
-        <div class="admin-empty-state">
-
-            <span>?</span>
-
-            <p>
-                FAQ management will be connected next.
-            </p>
-
-        </div>
-
-    `;
+    await loadAdminFAQs();
 
 }
 

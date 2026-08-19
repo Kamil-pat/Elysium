@@ -1,46 +1,794 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>About — Elysium</title>
-  <link rel="stylesheet" href="../css/global.css">
-</head>
-<body>
-  <!-- About page placeholder -->
+<!DOCTYPE html>
+<html lang="en">
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-main">
-        <div class="footer-brand">
-          <a href="../index.html" class="footer-logo">ELYSIUM</a>
-          <p>Your escape from the ordinary.</p>
-          <p class="footer-location">Huntsville, Alabama</p>
-        </div>
-        <div class="footer-column">
-          <p class="uppercase-label">Explore</p>
-          <a href="drinks.html">Drinks</a>
-          <a href="food.html">Food</a>
-          <a href="about.html">Our Story</a>
-          <a href="gallery.html">Gallery</a>
-        </div>
-        <div class="footer-column">
-          <p class="uppercase-label">Experiences</p>
-          <a href="cocktail-classes.html">Cocktail Classes</a>
-          <a href="private-events.html">Private Events</a>
-          <a href="greek-quiz.html">Greek God / Goddess</a>
-        </div>
-        <div class="footer-column">
-          <p class="uppercase-label">Information</p>
-          <a href="faq.html">FAQ</a>
-          <a href="contact.html">Contact</a>
-          <a href="private-events.html">Private Room</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 Elysium Cocktail Lounge. All rights reserved.</p>
-        <div class="footer-social"><a href="#">Instagram</a></div>
-      </div>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Discover the story and experience behind Elysium Cocktail Lounge in Huntsville, Alabama."
+    >
+
+    <meta
+        name="theme-color"
+        content="#080706"
+    >
+
+    <title>
+        About | Elysium Cocktail Lounge
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/about.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header
+        class="site-header"
+        id="site-header"
+    >
+
+        <nav class="navbar">
+
+            <div class="nav-links">
+
+                <a
+                    href="drinks.html"
+                    class="nav-link"
+                >
+                    Drinks
+                </a>
+
+                <a
+                    href="food.html"
+                    class="nav-link"
+                >
+                    Food
+                </a>
+
+                <a
+                    href="about.html"
+                    class="nav-link active"
+                >
+                    About
+                </a>
+
+            </div>
+
+
+            <a
+                href="../index.html"
+                class="nav-logo"
+                aria-label="Elysium Home"
+            >
+
+                <img
+                    src="../images/branding/laurel.png"
+                    alt=""
+                >
+
+                <span class="nav-logo-name">
+                    ELYSIUM
+                </span>
+
+                <span class="nav-logo-subtitle">
+                    Cocktail Lounge
+                </span>
+
+            </a>
+
+
+            <div class="nav-links nav-links-right">
+
+                <a
+                    href="cocktail-classes.html"
+                    class="nav-link"
+                >
+                    Classes
+                </a>
+
+                <a
+                    href="private-events.html"
+                    class="nav-link"
+                >
+                    Events
+                </a>
+
+                <a
+                    href="contact.html"
+                    class="nav-link"
+                >
+                    Contact
+                </a>
+
+                <a
+                    href="private-events.html"
+                    class="btn btn-primary nav-reserve"
+                >
+                    Book Private Room
+                </a>
+
+            </div>
+
+
+            <button
+                class="mobile-menu-button"
+                id="mobile-menu-button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MOBILE MENU
+         ===================================================== -->
+
+    <div
+        class="mobile-menu"
+        id="mobile-menu"
+        aria-hidden="true"
+    >
+
+        <nav class="mobile-menu-links">
+
+            <a
+                href="../index.html"
+                class="mobile-menu-link"
+            >
+                Home
+            </a>
+
+            <a
+                href="drinks.html"
+                class="mobile-menu-link"
+            >
+                Drinks
+            </a>
+
+            <a
+                href="food.html"
+                class="mobile-menu-link"
+            >
+                Food
+            </a>
+
+            <a
+                href="about.html"
+                class="mobile-menu-link"
+            >
+                About
+            </a>
+
+            <a
+                href="cocktail-classes.html"
+                class="mobile-menu-link"
+            >
+                Cocktail Classes
+            </a>
+
+            <a
+                href="private-events.html"
+                class="mobile-menu-link"
+            >
+                Private Events
+            </a>
+
+            <a
+                href="greek-quiz.html"
+                class="mobile-menu-link"
+            >
+                Greek God / Goddess
+            </a>
+
+            <a
+                href="gallery.html"
+                class="mobile-menu-link"
+            >
+                Gallery
+            </a>
+
+            <a
+                href="faq.html"
+                class="mobile-menu-link"
+            >
+                FAQ
+            </a>
+
+            <a
+                href="contact.html"
+                class="mobile-menu-link"
+            >
+                Contact
+            </a>
+
+            <a
+                href="private-events.html"
+                class="btn btn-primary"
+            >
+                Book Private Room
+            </a>
+
+        </nav>
+
     </div>
-  </footer>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             ABOUT HERO
+             ================================================= -->
+
+        <section class="about-hero">
+
+            <div class="about-hero-overlay"></div>
+
+
+            <div class="about-hero-content">
+
+                <p class="uppercase-label">
+                    The Elysium Experience
+                </p>
+
+                <h1>
+                    About
+                </h1>
+
+                <div class="gold-line center">
+
+                    <span class="gold-line-symbol"></span>
+
+                </div>
+
+                <p>
+                    An escape from the ordinary.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             OUR STORY
+             ================================================= -->
+
+        <section class="about-story">
+
+            <div class="container">
+
+                <div class="section-intro center">
+
+                    <p class="uppercase-label">
+                        Our Story
+                    </p>
+
+                    <h2>
+                        Welcome to
+                        <span class="gold-text">
+                            Elysium
+                        </span>
+                    </h2>
+
+                    <div class="gold-line center">
+
+                        <span class="gold-line-symbol"></span>
+
+                    </div>
+
+                    <p>
+                        A place created for extraordinary
+                        evenings, memorable conversations,
+                        and carefully crafted experiences.
+                    </p>
+
+                </div>
+
+
+                <div class="about-story-content">
+
+                    <div class="about-story-column">
+
+                        <p>
+                            Elysium was imagined as a place
+                            where exceptional drinks,
+                            thoughtful food, and meaningful
+                            moments could come together under
+                            one roof.
+                        </p>
+
+                        <p>
+                            Inspired by the timeless mythology
+                            of Elysium — a place reserved for
+                            those who lived extraordinary lives —
+                            our lounge offers a modern escape
+                            from the everyday.
+                        </p>
+
+                    </div>
+
+
+                    <div class="about-story-column">
+
+                        <p>
+                            Every detail is designed with the
+                            experience in mind. From the first
+                            drink to the final conversation,
+                            Elysium is meant to feel different
+                            from the moment you walk through
+                            the door.
+                        </p>
+
+                        <p>
+                            Whether you're joining us for a
+                            casual evening, celebrating a
+                            milestone, or discovering a new
+                            favorite cocktail, we invite you to
+                            slow down and enjoy the moment.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             EXPERIENCE
+             ================================================= -->
+
+        <section class="about-experience">
+
+            <div class="about-experience-image">
+
+                <img
+                    src="../images/about/about-experience.jpg"
+                    alt="Elysium Cocktail Lounge"
+                    loading="lazy"
+                    data-cms-photo="about"
+                    data-cms-photo-slot="1"
+                >
+
+            </div>
+
+
+            <div class="about-experience-content">
+
+                <p class="uppercase-label">
+                    The Experience
+                </p>
+
+                <h2>
+                    More Than
+                    <span class="gold-text">
+                        A Drink
+                    </span>
+                </h2>
+
+                <div class="gold-line">
+
+                    <span class="gold-line-symbol"></span>
+
+                </div>
+
+                <p>
+                    Elysium is built around the idea that
+                    going out should feel like an experience,
+                    not simply a transaction.
+                </p>
+
+                <p>
+                    Our cocktails draw inspiration from
+                    mythology, history, and the unexpected.
+                    Our food is designed for pairing,
+                    sharing, and discovering.
+                </p>
+
+                <p>
+                    Whether you're joining us for one cocktail
+                    or spending the evening with friends, our
+                    goal is simple: make the ordinary feel
+                    extraordinary.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PHILOSOPHY
+             ================================================= -->
+
+        <section class="about-philosophy">
+
+            <div class="container">
+
+                <div class="about-philosophy-content">
+
+                    <p class="uppercase-label">
+                        Our Philosophy
+                    </p>
+
+                    <blockquote>
+                        “The best evenings are the ones
+                        you don't want to end.”
+                    </blockquote>
+
+                    <div class="gold-line center">
+
+                        <span class="gold-line-symbol"></span>
+
+                    </div>
+
+                    <p>
+                        Thoughtfully crafted cocktails.
+                        Carefully prepared food.
+                        An atmosphere designed to slow
+                        the evening down.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             EXPERIENCES
+             ================================================= -->
+
+        <section class="about-experiences">
+
+            <div class="container">
+
+                <div class="section-intro center">
+
+                    <p class="uppercase-label">
+                        Discover More
+                    </p>
+
+                    <h2>
+                        Your Evening,
+                        <span class="gold-text">
+                            Your Way
+                        </span>
+                    </h2>
+
+                    <p>
+                        There's always another way to
+                        experience Elysium.
+                    </p>
+
+                </div>
+
+
+                <div class="about-experience-grid">
+
+
+                    <!-- DRINKS -->
+
+                    <a
+                        href="drinks.html"
+                        class="about-experience-card"
+                    >
+
+                        <span class="about-card-number">
+                            01
+                        </span>
+
+                        <h3>
+                            The Bar
+                        </h3>
+
+                        <p>
+                            Explore signature cocktails,
+                            classics, wine, beer, and
+                            spirit-forward pours.
+                        </p>
+
+                        <span class="about-card-link">
+                            Explore Drinks →
+                        </span>
+
+                    </a>
+
+
+                    <!-- CLASSES -->
+
+                    <a
+                        href="cocktail-classes.html"
+                        class="about-experience-card"
+                    >
+
+                        <span class="about-card-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Cocktail Classes
+                        </h3>
+
+                        <p>
+                            Learn the craft behind some
+                            of Elysium's favorite cocktails
+                            in an interactive experience.
+                        </p>
+
+                        <span class="about-card-link">
+                            View Classes →
+                        </span>
+
+                    </a>
+
+
+                    <!-- PRIVATE EVENTS -->
+
+                    <a
+                        href="private-events.html"
+                        class="about-experience-card"
+                    >
+
+                        <span class="about-card-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Private Events
+                        </h3>
+
+                        <p>
+                            Create an evening of your own
+                            in one of our private spaces.
+                        </p>
+
+                        <span class="about-card-link">
+                            Plan An Event →
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FAQ
+             ================================================= -->
+
+        <section
+            class="about-faq"
+            id="faq"
+        >
+
+            <div class="container">
+
+                <div class="section-intro center">
+
+                    <p class="uppercase-label">
+                        Frequently Asked
+                    </p>
+
+                    <h2>
+                        Questions
+                    </h2>
+
+                    <p>
+                        A few things you may want to know
+                        before your visit.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="faq-list"
+                    id="faq-list"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-main">
+
+
+                <div class="footer-brand">
+
+                    <a
+                        href="../index.html"
+                        class="footer-logo"
+                    >
+                        ELYSIUM
+                    </a>
+
+                    <p>
+                        Your escape from the ordinary.
+                    </p>
+
+                    <p class="footer-location">
+                        Huntsville, Alabama
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <p class="uppercase-label">
+                        Explore
+                    </p>
+
+                    <a href="drinks.html">
+                        Drinks
+                    </a>
+
+                    <a href="food.html">
+                        Food
+                    </a>
+
+                    <a href="about.html">
+                        Our Story
+                    </a>
+
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <p class="uppercase-label">
+                        Experiences
+                    </p>
+
+                    <a href="cocktail-classes.html">
+                        Cocktail Classes
+                    </a>
+
+                    <a href="private-events.html">
+                        Private Events
+                    </a>
+
+                    <a href="greek-quiz.html">
+                        Greek God / Goddess
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <p class="uppercase-label">
+                        Information
+                    </p>
+
+                    <a href="faq.html">
+                        FAQ
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                    <a href="private-events.html">
+                        Private Room
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    ©
+                    <span class="current-year"></span>
+                    Elysium Cocktail Lounge.
+                    All rights reserved.
+                </p>
+
+
+                <div class="footer-social">
+
+                    <a href="#">
+                        Instagram
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/navigation.js"></script>
+
+    <script src="../js/animations.js"></script>
+
+    <script src="../js/main.js"></script>
+
+    <script src="../js/about.js"></script>
+
+
 </body>
+
 </html>
