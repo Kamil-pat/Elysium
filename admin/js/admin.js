@@ -1486,27 +1486,6 @@ async function loadPhotoManager() {
 
 }
 
-
-    container.innerHTML = `
-
-        <div class="admin-empty-state">
-
-            <span>□</span>
-
-            <p>
-                Photo management is coming next.
-            </p>
-
-        </div>
-
-    `;
-
-
-
-
-
-
-
 async function loadCocktailClassManager() {
 
     const container =

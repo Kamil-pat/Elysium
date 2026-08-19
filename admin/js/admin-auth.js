@@ -46,9 +46,6 @@ document.addEventListener("DOMContentLoaded", async () => {
        VERIFY ELEMENTS
        ===================================================== */
 
-    console.log("Login form:", loginForm);
-    console.log("Login button:", loginButton);
-
 
     if (!loginForm) {
 
@@ -152,12 +149,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                         });
 
 
-                console.log(
-                    "Supabase response:",
-                    data,
-                    error
-                );
-
 
                 if (error) {
 
@@ -217,12 +208,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                         )
                         .maybeSingle();
 
-
-                console.log(
-                    "Admin result:",
-                    admin,
-                    adminError
-                );
 
 
                 if (adminError) {
@@ -327,11 +312,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    /* =====================================================
-       CHECK EXISTING SESSION
-       ===================================================== */
+     /* =====================================================
+         REQUIRE LOGIN AFTER PAGE LOAD
+         ===================================================== */
 
-    await checkExistingSession();
+     await logOutOnPageLoad();
 
 
     /* =====================================================
@@ -339,98 +324,20 @@ document.addEventListener("DOMContentLoaded", async () => {
        ===================================================== */
 
 
-    async function checkExistingSession() {
+    async function logOutOnPageLoad() {
 
         try {
 
-            const {
-                data,
-                error
-            } =
-                await window.supabaseClient
-                    .auth
-                    .getSession();
+            await window.supabaseClient
+                .auth
+                .signOut();
 
-
-            if (error) {
-
-                console.error(
-                    "Session error:",
-                    error
-                );
-
-                showLoginScreen();
-
-                return;
-
-            }
-
-
-            if (
-                !data ||
-                !data.session
-            ) {
-
-                showLoginScreen();
-
-                return;
-
-            }
-
-
-            console.log(
-                "Existing session found."
-            );
-
-
-            const user =
-                data.session.user;
-
-
-            const {
-                data: admin,
-                error: adminError
-            } =
-                await window.supabaseClient
-                    .from("admin_profiles")
-                    .select(
-                        "id, email, is_admin"
-                    )
-                    .eq(
-                        "id",
-                        user.id
-                    )
-                    .eq(
-                        "is_admin",
-                        true
-                    )
-                    .maybeSingle();
-
-
-            if (
-                adminError ||
-                !admin
-            ) {
-
-                await window.supabaseClient
-                    .auth
-                    .signOut();
-
-                showLoginScreen();
-
-                return;
-
-            }
-
-
-            showDashboard(
-                user
-            );
+            showLoginScreen();
 
         } catch (error) {
 
             console.error(
-                "Session check failed:",
+                "Page-load logout failed:",
                 error
             );
 
