@@ -44,6 +44,7 @@
                         preferred_start_time,
                         preferred_end_time,
                         request_number,
+                        requested_date,
 
                         private_room_slots (
                             reservation_date,
@@ -171,7 +172,7 @@
 
         const reservationDate =
             formatPrivateRoomDate(
-                slot.reservation_date
+                request.requested_date
             );
 
         const startTime =

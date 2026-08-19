@@ -785,6 +785,7 @@ async function loadRecentRequests() {
                     created_at,
                     preferred_start_time,
                     preferred_end_time,
+                    requested_date,
 
                     private_room_slots (
                         reservation_date,
@@ -877,7 +878,7 @@ function renderRecentRequests(
 
                     const date =
                         formatPrivateRoomDashboardDate(
-                            slot.reservation_date
+                            request.requested_date
                         );
 
                     const startTime =
