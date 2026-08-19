@@ -76,6 +76,64 @@ function setupNavigation() {
             "[data-section]"
         );
 
+    const dashboard =
+        document.getElementById("adminDashboard");
+
+    const mobileMenuToggle =
+        document.getElementById("adminMobileMenuToggle");
+
+    const mobileMenuBackdrop =
+        document.getElementById("adminMobileMenuBackdrop");
+
+    const closeMobileMenu = () => {
+
+        dashboard?.classList.remove("mobile-menu-open");
+
+        mobileMenuToggle?.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    };
+
+
+    const toggleMobileMenu = () => {
+
+        const isOpen =
+            dashboard?.classList.toggle("mobile-menu-open") ||
+            false;
+
+        mobileMenuToggle?.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+    };
+
+
+    mobileMenuToggle?.addEventListener(
+        "click",
+        toggleMobileMenu
+    );
+
+    mobileMenuBackdrop?.addEventListener(
+        "click",
+        closeMobileMenu
+    );
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (event.key === "Escape") {
+
+                closeMobileMenu();
+
+            }
+
+        }
+    );
+
 
     navigationButtons.forEach(
         (button) => {
@@ -98,6 +156,8 @@ function setupNavigation() {
                     showAdminSection(
                         section
                     );
+
+                    closeMobileMenu();
 
                 }
             );
