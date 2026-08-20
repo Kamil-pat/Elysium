@@ -18,6 +18,9 @@ document.addEventListener(
         }
 
 
+        let submissionInProgress = false;
+
+
         /* =================================================
            FORM SUBMISSION
            ================================================= */
@@ -27,6 +30,11 @@ document.addEventListener(
             async (event) => {
 
                 event.preventDefault();
+
+
+                if (submissionInProgress) {
+                    return;
+                }
 
 
                 /* =========================================
@@ -181,6 +189,8 @@ document.addEventListener(
 
                 clearContactMessage();
 
+                submissionInProgress = true;
+
 
                 try {
 
@@ -285,6 +295,8 @@ document.addEventListener(
 
 
                 } finally {
+
+                    submissionInProgress = false;
 
                     /* =====================================
                        RESTORE BUTTON

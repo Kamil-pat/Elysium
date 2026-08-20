@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     let classData = null;
+    let submissionInProgress = false;
 
 
     /* =====================================================
@@ -376,6 +377,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.preventDefault();
 
 
+                if (submissionInProgress) {
+                    return;
+                }
+
+
                 if (!classData) {
 
                     console.error(
@@ -479,6 +485,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 ================================================= */
 
                 submitButton.disabled = true;
+
+                submissionInProgress = true;
 
                 submitButton.textContent =
                     "Submitting...";
@@ -640,6 +648,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         submitButton.textContent =
                             "Request My Spots";
 
+                        submissionInProgress = false;
+
 
                         /*
                         * Refresh availability, but don't allow
@@ -728,6 +738,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     submitButton.textContent =
                         "Request My Spots";
+
+                    submissionInProgress = false;
 
                 }
 

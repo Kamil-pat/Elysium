@@ -122,7 +122,8 @@
     width: 100%;
     aspect-ratio: 4 / 5;
 
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 }
 
 .private-room-intro-content h2 {

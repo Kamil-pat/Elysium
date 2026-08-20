@@ -343,7 +343,8 @@
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 
     filter:
         saturate(0.78)
@@ -356,7 +357,7 @@
 
 .drink-card:hover
 .drink-card-image img {
-    transform: scale(1.06);
+    transform: none;
 
     filter:
         saturate(0.95)
@@ -526,14 +527,15 @@
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 
     transition: transform 1s ease;
 }
 
 .food-card:hover
 .food-card-image img {
-    transform: scale(1.05);
+    transform: none;
 }
 
 .food-card-content {

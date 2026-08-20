@@ -78,6 +78,10 @@ const FROM_EMAIL =
     "Elysium Cocktail Lounge <onboarding@resend.dev>";
 
 
+const RATE_LIMIT_WINDOW_MINUTES = 15;
+const RATE_LIMIT_MAX_REQUESTS = 8;
+
+
 /* =========================================================
    MAIN FUNCTION
    ========================================================= */
@@ -226,6 +230,62 @@ Deno.serve(
                             "Please enter a valid email address."
                     },
                     400
+                );
+
+            }
+
+
+            const rateLimitSince =
+                new Date(
+                    Date.now() -
+                    RATE_LIMIT_WINDOW_MINUTES *
+                    60 *
+                    1000
+                ).toISOString();
+
+            const {
+                count: recentMessageCount,
+                error: rateLimitError
+            } =
+                await supabaseAdmin
+                    .from("contact_messages")
+                    .select("id", {
+                        count: "exact",
+                        head: true
+                    })
+                    .eq("customer_email", email)
+                    .gte("created_at", rateLimitSince);
+
+
+            if (rateLimitError) {
+
+                console.error(
+                    "Contact rate limit check failed:",
+                    rateLimitError
+                );
+
+                return jsonResponse(
+                    {
+                        success: false,
+                        error: "Unable to process your message right now. Please try again shortly."
+                    },
+                    503
+                );
+
+            }
+
+
+            if (
+                (recentMessageCount || 0) >=
+                RATE_LIMIT_MAX_REQUESTS
+            ) {
+
+                return jsonResponse(
+                    {
+                        success: false,
+                        error: "Too many messages from this email address. Please try again later."
+                    },
+                    429
                 );
 
             }

@@ -53,6 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    let submissionInProgress = false;
+
+
     /* =====================================================
        SET MINIMUM DATE
        ===================================================== */
@@ -386,6 +389,11 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
 
+            if (submissionInProgress) {
+                return;
+            }
+
+
             if (
                 !validateForm()
             ) {
@@ -396,6 +404,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             setLoading(true);
+
+            submissionInProgress = true;
 
 
             try {
@@ -546,6 +556,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 setLoading(false);
+
+                submissionInProgress = false;
 
             }
 

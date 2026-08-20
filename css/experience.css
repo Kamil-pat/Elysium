@@ -212,13 +212,14 @@
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 
     transition: transform 1s ease;
 }
 
 .class-card:hover .class-card-image img {
-    transform: scale(1.05);
+    transform: none;
 }
 
 .class-image-placeholder {
@@ -594,7 +595,8 @@
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 }
 
 .booking-image-placeholder {

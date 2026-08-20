@@ -41,6 +41,152 @@ document.addEventListener("DOMContentLoaded", async () => {
     const adminUserEmail =
         document.getElementById("adminUserEmail");
 
+    const passwordToggle =
+        document.getElementById("adminPasswordToggle");
+
+
+    passwordToggle?.addEventListener(
+        "click",
+        () => {
+
+            const isVisible =
+                loginPassword.type === "text";
+
+            loginPassword.type =
+                isVisible
+                    ? "password"
+                    : "text";
+
+            passwordToggle.textContent =
+                isVisible
+                    ? "SHOW"
+                    : "HIDE";
+
+            passwordToggle.setAttribute(
+                "aria-label",
+                isVisible
+                    ? "Show password"
+                    : "Hide password"
+            );
+
+            passwordToggle.setAttribute(
+                "aria-pressed",
+                String(!isVisible)
+            );
+
+        }
+    );
+
+
+    const LOGIN_ATTEMPT_LIMIT = 5;
+    const LOGIN_ATTEMPT_WINDOW_MS = 60 * 30 * 1000;
+    const LOGIN_ATTEMPTS_STORAGE_KEY =
+        "elysiumAdminLoginAttempts";
+
+
+    const getRecentLoginAttempts = () => {
+
+        const now = Date.now();
+        let attempts = [];
+
+        try {
+
+            attempts = JSON.parse(
+                localStorage.getItem(
+                    LOGIN_ATTEMPTS_STORAGE_KEY
+                ) || "[]"
+            );
+
+        } catch {
+
+            attempts = [];
+
+        }
+
+        attempts = attempts.filter(
+            (timestamp) =>
+                Number.isFinite(timestamp) &&
+                now - timestamp < LOGIN_ATTEMPT_WINDOW_MS
+        );
+
+        localStorage.setItem(
+            LOGIN_ATTEMPTS_STORAGE_KEY,
+            JSON.stringify(attempts)
+        );
+
+        return attempts;
+
+    };
+
+
+    const recordFailedLoginAttempt = () => {
+
+        const attempts = getRecentLoginAttempts();
+
+        attempts.push(Date.now());
+
+        localStorage.setItem(
+            LOGIN_ATTEMPTS_STORAGE_KEY,
+            JSON.stringify(attempts)
+        );
+
+        return attempts.length;
+
+    };
+
+
+    const clearLoginAttempts = () => {
+
+        localStorage.removeItem(
+            LOGIN_ATTEMPTS_STORAGE_KEY
+        );
+
+    };
+
+
+    const showLoginAttemptLimit = (
+        attemptCount
+    ) => {
+
+        const remainingAttempts =
+            LOGIN_ATTEMPT_LIMIT - attemptCount;
+
+        showError(
+            remainingAttempts > 0
+                ? `Incorrect login. You have a limit of ${LOGIN_ATTEMPT_LIMIT} login attempts per hour. ${remainingAttempts} ${remainingAttempts === 1 ? "attempt" : "attempts"} remaining.`
+                : "You have reached the limit of 5 login attempts per hour. Please try again later."
+        );
+
+        if (
+            attemptCount >= LOGIN_ATTEMPT_LIMIT
+        ) {
+
+            loginButton.disabled = true;
+            loginButton.textContent = "TRY AGAIN LATER";
+
+        }
+
+    };
+
+
+    const recentLoginAttempts =
+        getRecentLoginAttempts();
+
+
+    if (
+        recentLoginAttempts.length >=
+        LOGIN_ATTEMPT_LIMIT
+    ) {
+
+        loginButton.disabled = true;
+        loginButton.textContent = "TRY AGAIN LATER";
+
+        showLoginAttemptLimit(
+            recentLoginAttempts.length
+        );
+
+    }
+
 
     /* =====================================================
        VERIFY ELEMENTS
@@ -89,6 +235,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         async (event) => {
 
             event.preventDefault();
+
+
+            if (
+                getRecentLoginAttempts().length >=
+                LOGIN_ATTEMPT_LIMIT
+            ) {
+
+                showLoginAttemptLimit(
+                    LOGIN_ATTEMPT_LIMIT
+                );
+
+                return;
+
+            }
 
             console.log(
                 "LOGIN FORM SUBMITTED"
@@ -157,8 +317,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                         error
                     );
 
-                    showError(
-                        getFriendlyError(error)
+                    const attemptCount =
+                        recordFailedLoginAttempt();
+
+                    showLoginAttemptLimit(
+                        attemptCount
                     );
 
                     return;
@@ -171,8 +334,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     !data.user
                 ) {
 
-                    showError(
-                        "Login failed. Please try again."
+                    const attemptCount =
+                        recordFailedLoginAttempt();
+
+                    showLoginAttemptLimit(
+                        attemptCount
                     );
 
                     return;
@@ -258,6 +424,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     data.user
                 );
 
+                clearLoginAttempts();
+
 
             } catch (error) {
 
@@ -272,11 +440,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             } finally {
 
+                const attemptsAfterLogin =
+                    getRecentLoginAttempts().length;
+
+                const loginLimitReached =
+                    attemptsAfterLogin >=
+                    LOGIN_ATTEMPT_LIMIT;
+
                 loginButton.disabled =
-                    false;
+                    loginLimitReached;
 
                 loginButton.textContent =
-                    "SIGN IN";
+                    loginLimitReached
+                        ? "TRY AGAIN LATER"
+                        : "SIGN IN";
 
             }
 

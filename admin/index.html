@@ -115,14 +115,28 @@
                     Password
                 </label>
 
-                <input
-                    type="password"
-                    id="loginPassword"
-                    name="password"
-                    placeholder="Password"
-                    autocomplete="current-password"
-                    required
-                >
+                <div class="admin-password-field">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="password"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="admin-password-toggle"
+                        id="adminPasswordToggle"
+                        aria-label="Show password"
+                        aria-pressed="false"
+                    >
+                        SHOW
+                    </button>
+
+                </div>
 
             </div>
 

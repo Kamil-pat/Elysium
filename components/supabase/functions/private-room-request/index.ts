@@ -83,6 +83,10 @@ const FROM_EMAIL =
     "Elysium Cocktail Lounge <onboarding@resend.dev>";
 
 
+const RATE_LIMIT_WINDOW_HOURS = 1;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+
+
 /* =========================================================
    MAIN FUNCTION
    ========================================================= */
@@ -297,6 +301,70 @@ Deno.serve(
             }
 
 
+            const customerEmail =
+                String(
+                    customer_email
+                )
+                    .trim()
+                    .toLowerCase();
+
+            const rateLimitSince =
+                new Date(
+                    Date.now() -
+                    RATE_LIMIT_WINDOW_HOURS *
+                    60 *
+                    60 *
+                    1000
+                ).toISOString();
+
+            const {
+                count: recentRequestCount,
+                error: rateLimitError
+            } =
+                await supabaseAdmin
+                    .from("private_room_bookings")
+                    .select("id", {
+                        count: "exact",
+                        head: true
+                    })
+                    .eq("customer_email", customerEmail)
+                    .gte("created_at", rateLimitSince);
+
+
+            if (rateLimitError) {
+
+                console.error(
+                    "Private room rate limit check failed:",
+                    rateLimitError
+                );
+
+                return jsonResponse(
+                    {
+                        success: false,
+                        error: "Unable to process your request right now. Please try again shortly."
+                    },
+                    503
+                );
+
+            }
+
+
+            if (
+                (recentRequestCount || 0) >=
+                RATE_LIMIT_MAX_REQUESTS
+            ) {
+
+                return jsonResponse(
+                    {
+                        success: false,
+                        error: "Too many requests from this email address. Please try again later."
+                    },
+                    429
+                );
+
+            }
+
+
             /* =============================================
                SAVE REQUEST
                ============================================= */
@@ -315,9 +383,7 @@ Deno.serve(
                             customer_name.trim(),
 
                         customer_email:
-                            customer_email
-                                .trim()
-                                .toLowerCase(),
+                            customerEmail,
 
                         customer_phone:
                             customer_phone
@@ -433,7 +499,7 @@ Deno.serve(
                         "New Elysium Private Room Request",
 
                     replyTo:
-                        customer_email,
+                        customerEmail,
 
                     html:
                         buildManagerEmail({
@@ -442,7 +508,7 @@ Deno.serve(
                                 customer_name,
 
                             customerEmail:
-                                customer_email,
+                                customerEmail,
 
                             customerPhone:
                                 customer_phone,
@@ -516,7 +582,7 @@ Deno.serve(
                 await sendEmail({
 
                     to:
-                        customer_email,
+                        customerEmail,
 
                     subject:
                         "We've Received Your Elysium Private Room Request",

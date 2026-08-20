@@ -108,6 +108,16 @@ img {
     max-width: 100%;
 }
 
+
+/* CMS-managed images stay inside their assigned box without cropping or scaling up. */
+img[data-cms-photo] {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: none;
+}
+
 button,
 a {
     -webkit-tap-highlight-color: transparent;

@@ -385,7 +385,10 @@
         100%;
 
     object-fit:
-        cover;
+        contain;
+
+    object-position:
+        center;
 
     display:
         block;
