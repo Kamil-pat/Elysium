@@ -487,7 +487,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(
                     "Elysium: cocktail class booking successful:",
                     {
-                        classId: classData.id,
                         guestCount: guestCount,
                         customerName: name,
                         customerEmail: email
@@ -614,12 +613,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
 
-                    console.log(
-                        "Elysium: normalized booking result:",
-                        result
-                    );
-
-
                     /* =============================================
                     DATABASE REJECTED BOOKING
                     ============================================= */
@@ -702,8 +695,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ============================================= */
 
                     console.log(
-                        "Elysium: cocktail class booking successful:",
-                        result
+                        "Elysium: cocktail class booking successful",
                     );
 
 
@@ -754,6 +746,15 @@ document.addEventListener("DOMContentLoaded", () => {
         layout.hidden = true;
 
         success.hidden = false;
+
+        requestAnimationFrame(() => {
+
+            success.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        });
 
 
         const remaining =
