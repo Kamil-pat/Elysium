@@ -529,6 +529,97 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }, 700);
 
+                        console.log(
+            "Elysium: cocktail class booking successful",
+        );
+
+
+        /* =============================================
+        SEND CUSTOMER CONFIRMATION EMAIL
+        ============================================= */
+
+        try {
+
+            const {
+                data: emailData,
+                error: emailError
+            } =
+                await supabaseClient.functions.invoke(
+                    "cocktail-class-confirmation",
+                    {
+                        body: {
+                            customerName:
+                                name,
+
+                            customerEmail:
+                                email,
+
+                            classTitle:
+                                classData.title ||
+                                "Cocktail Class",
+
+                            classDate:
+                                classData.class_date,
+
+                            startTime:
+                                classData.start_time,
+
+                            endTime:
+                                classData.end_time,
+
+                            guestCount:
+                                guestCount,
+
+                            total:
+                                guestCount *
+                                Number(classData.price)
+                        }
+                    }
+                );
+
+
+            if (emailError) {
+
+                console.error(
+                    "Confirmation email failed:",
+                    emailError
+                );
+
+                /*
+                * Do NOT fail the booking.
+                *
+                * The booking was already successfully
+                * created in the database.
+                */
+
+            } else {
+
+                console.log(
+                    "Cocktail class confirmation email sent:",
+                    emailData
+                );
+
+            }
+
+
+        } catch (emailError) {
+
+            console.error(
+                "Unable to send confirmation email:",
+                emailError
+            );
+
+        }
+
+
+        /* =============================================
+        SHOW SUCCESS
+        ============================================= */
+
+        showSuccess(
+            successfulResult
+        );
+
 
                 try {
 
