@@ -618,25 +618,34 @@ async function loadMenuItemsCount() {
 
     try {
 
-        const {
-            count,
-            error
-        } =
-            await window.supabaseClient
-                .from(
-                    "menu_items"
-                )
-                .select(
-                    "id",
-                    {
+        const [
+            drinksResult,
+            foodResult
+        ] =
+            await Promise.all([
+
+                window.supabaseClient
+                    .from("drinks")
+                    .select("id", {
                         count: "exact",
                         head: true
-                    }
-                )
-                .eq(
-                    "is_visible",
-                    true
-                );
+                    })
+                    .eq("is_visible", true),
+
+                window.supabaseClient
+                    .from("food")
+                    .select("id", {
+                        count: "exact",
+                        head: true
+                    })
+                    .eq("is_visible", true)
+
+            ]);
+
+
+        const error =
+            drinksResult.error ||
+            foodResult.error;
 
 
         if (error) {
@@ -661,7 +670,8 @@ async function loadMenuItemsCount() {
         if (element) {
 
             element.textContent =
-                count ?? 0;
+                (drinksResult.count || 0) +
+                (foodResult.count || 0);
 
         }
 
