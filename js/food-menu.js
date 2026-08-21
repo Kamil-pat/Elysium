@@ -8,10 +8,10 @@ document.addEventListener(
     () => {
 
         const categories = [
-            "small-plates",
-            "shareables",
-            "entrees",
-            "desserts"
+            "Offerings of Olympus",
+            "Flames of the Gods",
+            "Garden of the Gods",
+            "Ambrosia Flatbread"
         ];
 
 

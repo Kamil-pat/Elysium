@@ -41,20 +41,20 @@ const ADMIN_DRINK_CATEGORIES = [
 
 const ADMIN_FOOD_CATEGORIES = [
     {
-        value: "small-plates",
-        label: "Small Plates"
+        value: "Offerings of Olympus",
+        label: "Offerings of Olympus"
     },
     {
-        value: "shareables",
-        label: "Shareables"
+        value: "Flames of the Gods",
+        label: "Flames of the Gods"
     },
     {
-        value: "entrees",
-        label: "Entrées"
+        value: "Garden of the Gods",
+        label: "Garden of the Gods"
     },
     {
-        value: "desserts",
-        label: "Desserts"
+        value: "Ambrosia Flatbread",
+        label: "Ambrosia Flatbread"
     }
 ];
 
