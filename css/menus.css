@@ -1,4 +1,3 @@
-
 /* =========================================================
    ELYSIUM COCKTAIL LOUNGE
    MENU STYLES
@@ -23,13 +22,16 @@
 
     padding: 160px 0 100px;
 
-    background: var(--elysium-black);
+    background:
+        var(--elysium-black);
 }
+
 
 .menu-hero-background {
     position: absolute;
     inset: 0;
 }
+
 
 .menu-hero-background img {
     width: 100%;
@@ -38,11 +40,13 @@
     object-fit: cover;
 
     filter:
-        brightness(0.6)
+        brightness(0.58)
         saturate(0.7);
 
-    animation: menuHeroZoom 12s ease-out forwards;
+    animation:
+        menuHeroZoom 12s ease-out forwards;
 }
+
 
 @keyframes menuHeroZoom {
 
@@ -51,10 +55,11 @@
     }
 
     to {
-        transform: scale(1.08);
+        transform: scale(1.07);
     }
 
 }
+
 
 .menu-hero-overlay {
     position: absolute;
@@ -63,63 +68,84 @@
     background:
         linear-gradient(
             to bottom,
-            rgba(8, 7, 6, 0.1) 0%,
-            rgba(8, 7, 6, 0.35) 35%,
-            rgba(8, 7, 6, 0.95) 100%
+            rgba(8, 7, 6, 0.08) 0%,
+            rgba(8, 7, 6, 0.3) 40%,
+            rgba(8, 7, 6, 0.96) 100%
         );
 }
 
+
 .menu-hero-content {
     position: relative;
+
     z-index: 2;
 
-    width: min(
-        calc(100% - 80px),
-        var(--content-width)
-    );
+    width:
+        min(
+            calc(100% - 48px),
+            var(--content-width)
+        );
 
     margin-inline: auto;
 
     text-align: center;
 }
 
+
 .menu-hero-content .uppercase-label {
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
-.menu-hero-content h1 {
-    margin-bottom: 20px;
 
-    font-size: clamp(
-        5rem,
-        11vw,
-        11rem
-    );
+.menu-hero-content h1 {
+    margin:
+        0 0 20px;
+
+    font-size:
+        clamp(
+            5rem,
+            11vw,
+            10rem
+        );
 
     font-weight: 300;
 
-    letter-spacing: 0.08em;
+    letter-spacing:
+        0.08em;
 
-    text-transform: uppercase;
+    line-height:
+        0.9;
+
+    text-transform:
+        uppercase;
 }
+
 
 .menu-hero-content .gold-line {
-    margin: 30px auto;
+    margin:
+        28px auto;
 }
 
+
 .menu-hero-content > p:last-child {
-    max-width: 550px;
+    max-width:
+        560px;
 
     margin-inline: auto;
 
-    color: var(--elysium-cream-soft);
+    color:
+        var(--elysium-cream-soft);
 
-    font-size: 0.95rem;
+    font-size:
+        0.95rem;
+
+    line-height:
+        1.8;
 }
 
 
 /* =========================================================
-   2. MENU CATEGORY NAVIGATION
+   2. CATEGORY NAVIGATION
    ========================================================= */
 
 .menu-navigation {
@@ -130,24 +156,35 @@
     z-index: 100;
 
     background:
-        rgba(8, 7, 6, 0.96);
+        rgba(
+            8,
+            7,
+            6,
+            0.94
+        );
 
-    border-top: 1px solid rgba(
-        201,
-        150,
-        74,
-        0.1
-    );
+    border-top:
+        1px solid
+        rgba(
+            201,
+            150,
+            74,
+            0.08
+        );
 
-    border-bottom: 1px solid rgba(
-        201,
-        150,
-        74,
-        0.15
-    );
+    border-bottom:
+        1px solid
+        rgba(
+            201,
+            150,
+            74,
+            0.14
+        );
 
-    backdrop-filter: blur(15px);
+    backdrop-filter:
+        blur(18px);
 }
+
 
 .menu-tabs {
     display: flex;
@@ -155,553 +192,994 @@
     align-items: center;
     justify-content: center;
 
-    gap: 0;
+    gap: 8px;
 
     overflow-x: auto;
 
     scrollbar-width: none;
 }
 
+
 .menu-tabs::-webkit-scrollbar {
     display: none;
 }
 
+
+/* =========================================================
+   CATEGORY LINKS
+   ========================================================= */
+
 .menu-tab {
     position: relative;
 
-    flex: 0 0 auto;
+    flex:
+        0 0 auto;
 
-    padding: 25px 25px;
+    display: block;
 
-    background: transparent;
+    padding:
+        21px 22px;
 
-    color: var(--elysium-muted);
+    color:
+        rgba(
+            243,
+            238,
+            229,
+            0.52
+        );
 
-    font-family: var(--font-body);
+    background:
+        transparent;
 
-    font-size: 0.62rem;
-    font-weight: 500;
+    border:
+        0;
 
-    letter-spacing: 0.18em;
+    font-family:
+        var(--font-body);
 
-    text-transform: uppercase;
+    font-size:
+        0.62rem;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        0.18em;
+
+    line-height:
+        1;
+
+    text-transform:
+        uppercase;
+
+    text-decoration:
+        none;
 
     transition:
-        color var(--transition-fast),
-        background var(--transition-fast);
+        color 0.25s ease;
 }
+
 
 .menu-tab::after {
     content: "";
 
     position: absolute;
 
-    bottom: 0;
     left: 50%;
+    bottom: 0;
 
     width: 0;
-    height: 2px;
+    height: 1px;
 
-    background: var(--elysium-gold);
+    background:
+        var(--elysium-gold);
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     transition:
-        width var(--transition-medium);
+        width 0.25s ease;
 }
+
 
 .menu-tab:hover {
-    color: var(--elysium-cream);
+    color:
+        var(--elysium-cream);
 }
+
+
+.menu-tab:hover::after {
+    width:
+        45%;
+}
+
 
 .menu-tab.active {
-    color: var(--elysium-gold-light);
+    color:
+        var(--elysium-gold-light);
 }
 
+
 .menu-tab.active::after {
-    width: 60%;
+    width:
+        45%;
 }
 
 
 /* =========================================================
-   3. MENU SECTIONS
+   3. PAGE SCROLLING
+   ========================================================= */
+
+html {
+    scroll-behavior:
+        smooth;
+}
+
+
+.menu-section {
+    scroll-margin-top:
+        150px;
+}
+
+
+/* =========================================================
+   4. MENU SECTIONS
    ========================================================= */
 
 .menu-section {
-    padding: 130px 0;
+    padding:
+        110px 0;
 
-    background: var(--elysium-black);
+    background:
+        var(--elysium-black);
 }
+
 
 .menu-section-dark {
     background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(201, 150, 74, 0.025),
-            transparent 35%
+        linear-gradient(
+            180deg,
+            rgba(
+                255,
+                255,
+                255,
+                0.012
+            ),
+            rgba(
+                255,
+                255,
+                255,
+                0
+            )
         ),
         var(--elysium-dark);
 }
 
-.menu-section .section-intro {
-    max-width: 700px;
 
-    margin-bottom: 75px;
+/* =========================================================
+   SECTION INTRO
+   ========================================================= */
+
+.menu-section .section-intro {
+    max-width:
+        700px;
+
+    margin:
+        0 auto 50px;
+
+    text-align:
+        center;
 }
+
+
+.menu-section .section-intro .uppercase-label {
+    color:
+        var(--elysium-gold);
+
+    font-size:
+        0.62rem;
+
+    letter-spacing:
+        0.22em;
+}
+
 
 .menu-section .section-intro h2 {
-    margin-bottom: 25px;
+    margin:
+        12px 0 18px;
 
-    font-size: clamp(
-        3.5rem,
-        7vw,
-        7rem
-    );
-}
-
-.menu-section .section-intro p:last-child {
-    margin-inline: auto;
-
-    max-width: 600px;
-}
-
-
-/* =========================================================
-   4. MENU GRID
-   ========================================================= */
-
-.menu-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 25px;
-}
-
-
-/* =========================================================
-   5. DRINK CARDS
-   ========================================================= */
-
-.drink-card {
-    overflow: hidden;
-
-    background: var(--elysium-dark);
-
-    border: 1px solid rgba(
-        242,
-        233,
-        218,
-        0.08
-    );
-
-    transition:
-        border-color var(--transition-medium),
-        transform var(--transition-medium),
-        box-shadow var(--transition-medium);
-}
-
-.drink-card:hover {
-    border-color: var(--border-gold);
-
-    transform: translateY(-6px);
-
-    box-shadow: var(--shadow-soft);
-}
-
-
-/* ---------- Drink Image ---------- */
-
-.drink-card-image {
-    position: relative;
-
-    aspect-ratio: 4 / 5;
-
-    overflow: hidden;
-
-    background: var(--elysium-black);
-}
-
-.drink-card-image::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent 65%,
-            rgba(8, 7, 6, 0.4)
+    font-size:
+        clamp(
+            3rem,
+            6vw,
+            5.5rem
         );
 
-    pointer-events: none;
+    line-height:
+        0.95;
+
+    font-weight:
+        400;
 }
 
-.drink-card-image img {
-    width: 100%;
-    height: 100%;
 
-    object-fit: contain;
-    object-position: center;
+.menu-section .section-intro p:last-child {
+    max-width:
+        560px;
 
-    filter:
-        saturate(0.78)
-        contrast(1.03);
+    margin:
+        0 auto;
+
+    color:
+        var(--elysium-muted);
+
+    font-size:
+        0.82rem;
+
+    line-height:
+        1.75;
+}
+
+
+/* =========================================================
+   5. FOOD MENU
+   CLEAN RESTAURANT LIST
+   ========================================================= */
+
+.food-grid {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    width:
+        100%;
+
+    border-top:
+        1px solid
+        rgba(
+            242,
+            233,
+            218,
+            0.12
+        );
+}
+
+
+/* =========================================================
+   FOOD ITEM
+   ========================================================= */
+
+.food-card {
+    position:
+        relative;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+    align-items:
+        center;
+
+    gap:
+        40px;
+
+    min-height:
+        110px;
+
+    padding:
+        25px 5px;
+
+    overflow:
+        visible;
+
+    background:
+        transparent;
+
+    border:
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(
+            242,
+            233,
+            218,
+            0.10
+        );
 
     transition:
-        transform 1s ease,
-        filter 1s ease;
-}
-
-.drink-card:hover
-.drink-card-image img {
-    transform: none;
-
-    filter:
-        saturate(0.95)
-        contrast(1.05);
+        padding-left 0.25s ease,
+        border-color 0.25s ease;
 }
 
 
-/* ---------- Drink Content ---------- */
+.food-card:hover {
+    transform:
+        none;
 
-.drink-card-content {
-    padding: 30px;
+    padding-left:
+        12px;
+
+    background:
+        transparent;
+
+    border-color:
+        rgba(
+            201,
+            150,
+            74,
+            0.35
+        );
 }
 
-.drink-card-heading {
-    display: flex;
 
-    align-items: baseline;
-    justify-content: space-between;
+/* =========================================================
+   FOOD IMAGE
+   Hidden for list presentation
+   ========================================================= */
 
-    gap: 20px;
-
-    margin-bottom: 12px;
+.food-card-image {
+    display:
+        none;
 }
 
-.drink-card-heading h3 {
-    margin: 0;
 
-    color: var(--elysium-cream);
+/* =========================================================
+   FOOD CONTENT
+   ========================================================= */
 
-    font-size: 2rem;
+.food-card-content {
+    width:
+        100%;
 
-    line-height: 1;
+    padding:
+        0;
 }
 
-.drink-price {
-    flex-shrink: 0;
 
-    color: var(--elysium-gold-light);
+/* =========================================================
+   FOOD NAME + PRICE
+   ========================================================= */
 
-    font-family: var(--font-display);
+.food-card-heading {
+    display:
+        flex;
 
-    font-size: 1.4rem;
+    align-items:
+        baseline;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    margin:
+        0 0 7px;
 }
 
-.drink-description {
-    margin-bottom: 12px;
 
-    color: var(--elysium-cream-soft);
+.food-card-heading h3 {
+    margin:
+        0;
 
-    font-size: 0.82rem;
+    color:
+        var(--elysium-cream);
 
-    line-height: 1.6;
+    font-family:
+        var(--font-display);
+
+    font-size:
+        1.65rem;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.2;
+
+    transition:
+        color 0.2s ease;
 }
 
-.drink-ingredients {
-    color: var(--elysium-muted);
 
-    font-size: 0.62rem;
+.food-card:hover
+.food-card-heading h3 {
+    color:
+        var(--elysium-gold-light);
+}
 
-    letter-spacing: 0.08em;
 
-    text-transform: uppercase;
+.food-price {
+    flex-shrink:
+        0;
+
+    color:
+        var(--elysium-gold-light);
+
+    font-family:
+        var(--font-display);
+
+    font-size:
+        1.2rem;
+
+    line-height:
+        1;
+
+    white-space:
+        nowrap;
+}
+
+
+/* =========================================================
+   FOOD DESCRIPTION
+   ========================================================= */
+
+.food-description {
+    max-width:
+        700px;
+
+    margin:
+        0;
+
+    color:
+        var(--elysium-muted);
+
+    font-size:
+        0.75rem;
+
+    line-height:
+        1.6;
 }
 
 
 /* =========================================================
    6. SIMPLE MENU
-   Used for classics, wine, beer, food categories, etc.
+   Wine / Beer / Spirited Forwards /
+   Zero Proof / Old Fashioned
    ========================================================= */
 
 .simple-menu-grid {
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
-    column-gap: 80px;
+    column-gap:
+        70px;
 
-    border-top: 1px solid var(--border-light);
+    border-top:
+        1px solid
+        var(--border-light);
 }
+
 
 .simple-menu-item {
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
-    justify-content: space-between;
+    align-items:
+        center;
 
-    gap: 30px;
+    justify-content:
+        space-between;
 
-    min-height: 120px;
+    gap:
+        25px;
 
-    padding: 25px 0;
+    min-height:
+        110px;
 
-    border-bottom: 1px solid var(--border-light);
+    padding:
+        22px 0;
+
+    border-bottom:
+        1px solid
+        var(--border-light);
 
     transition:
-        padding var(--transition-medium),
-        border-color var(--transition-medium);
+        border-color 0.25s ease,
+        padding-left 0.25s ease;
 }
 
+
 .simple-menu-item:hover {
-    padding-left: 10px;
+    padding-left:
+        7px;
 
     border-bottom-color:
         var(--border-gold);
 }
 
-.simple-menu-item h3 {
-    margin-bottom: 8px;
 
-    font-size: 1.8rem;
+.simple-menu-item h3 {
+    margin:
+        0 0 7px;
+
+    font-size:
+        1.65rem;
+
+    font-weight:
+        400;
 
     transition:
-        color var(--transition-fast);
+        color 0.2s ease;
 }
+
 
 .simple-menu-item:hover h3 {
-    color: var(--elysium-gold-light);
+    color:
+        var(--elysium-gold-light);
 }
+
 
 .simple-menu-item p {
-    color: var(--elysium-muted);
+    margin:
+        0;
 
-    font-size: 0.72rem;
+    color:
+        var(--elysium-muted);
+
+    font-size:
+        0.7rem;
+
+    line-height:
+        1.5;
 }
+
 
 .simple-menu-item > span {
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
-    color: var(--elysium-gold-light);
+    color:
+        var(--elysium-gold-light);
 
-    font-family: var(--font-display);
+    font-family:
+        var(--font-display);
 
-    font-size: 1.4rem;
+    font-size:
+        1.25rem;
+
+    white-space:
+        nowrap;
 }
 
 
 /* =========================================================
-   7. FOOD-SPECIFIC FOUNDATION
+   7. DRINK CARDS
+   Signature Cocktails
    ========================================================= */
 
-.food-card {
-    overflow: hidden;
+.menu-grid {
+    display:
+        grid;
 
-    background: var(--elysium-dark);
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
-    border: 1px solid var(--border-light);
+    gap:
+        22px;
+}
+
+
+.drink-card {
+    overflow:
+        hidden;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.025
+        );
+
+    border:
+        1px solid
+        rgba(
+            242,
+            233,
+            218,
+            0.08
+        );
 
     transition:
-        border-color var(--transition-medium),
-        transform var(--transition-medium);
+        transform 0.3s ease,
+        border-color 0.3s ease;
 }
 
-.food-card:hover {
-    border-color: var(--border-gold);
 
-    transform: translateY(-5px);
-}
+.drink-card:hover {
+    transform:
+        translateY(-4px);
 
-.food-card-image {
-    aspect-ratio: 16 / 11;
-
-    overflow: hidden;
-}
-
-.food-card-image img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-    object-position: center;
-
-    transition: transform 1s ease;
-}
-
-.food-card:hover
-.food-card-image img {
-    transform: none;
-}
-
-.food-card-content {
-    padding: 28px 30px 32px;
-}
-
-.food-card-heading {
-    display: flex;
-
-    align-items: baseline;
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-bottom: 10px;
-}
-
-.food-card-heading h3 {
-    font-size: 1.9rem;
-}
-
-.food-price {
-    color: var(--elysium-gold-light);
-
-    font-family: var(--font-display);
-
-    font-size: 1.4rem;
-}
-
-.food-description {
-    color: var(--elysium-cream-soft);
-
-    font-size: 0.8rem;
-
-    line-height: 1.6;
+    border-color:
+        var(--border-gold);
 }
 
 
 /* =========================================================
-   8. MENU CTA
+   DRINK IMAGE
+   ========================================================= */
+
+.drink-card-image {
+    position:
+        relative;
+
+    aspect-ratio:
+        4 / 5;
+
+    overflow:
+        hidden;
+
+    background:
+        var(--elysium-black);
+}
+
+
+.drink-card-image img {
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        contain;
+
+    object-position:
+        center;
+}
+
+
+/* =========================================================
+   DRINK CONTENT
+   ========================================================= */
+
+.drink-card-content {
+    padding:
+        25px;
+}
+
+
+.drink-card-heading {
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    justify-content:
+        space-between;
+
+    gap:
+        18px;
+
+    margin-bottom:
+        10px;
+}
+
+
+.drink-card-heading h3 {
+    margin:
+        0;
+
+    font-size:
+        1.7rem;
+
+    font-weight:
+        400;
+}
+
+
+.drink-price {
+    flex-shrink:
+        0;
+
+    color:
+        var(--elysium-gold-light);
+
+    font-family:
+        var(--font-display);
+
+    font-size:
+        1.25rem;
+}
+
+
+.drink-description {
+    margin:
+        0 0 10px;
+
+    color:
+        var(--elysium-cream-soft);
+
+    font-size:
+        0.78rem;
+
+    line-height:
+        1.65;
+}
+
+
+.drink-ingredients {
+    color:
+        var(--elysium-muted);
+
+    font-size:
+        0.6rem;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+}
+
+
+/* =========================================================
+   8. EMPTY / LOADING STATES
+   ========================================================= */
+
+.menu-loading {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        220px;
+
+    color:
+        var(--elysium-muted);
+
+    font-size:
+        0.65rem;
+
+    letter-spacing:
+        0.2em;
+
+    text-transform:
+        uppercase;
+}
+
+
+.menu-empty {
+    padding:
+        65px 20px;
+
+    color:
+        var(--elysium-muted);
+
+    text-align:
+        center;
+}
+
+
+.menu-empty h3 {
+    margin:
+        0 0 10px;
+
+    color:
+        var(--elysium-cream);
+
+    font-size:
+        1.5rem;
+
+    font-weight:
+        400;
+}
+
+
+.menu-empty p {
+    margin:
+        0;
+
+    font-size:
+        0.8rem;
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   9. MENU CTA
    ========================================================= */
 
 .menu-cta {
-    position: relative;
+    position:
+        relative;
 
-    padding: 140px 0;
+    overflow:
+        hidden;
 
-    overflow: hidden;
+    padding:
+        125px 0;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(201, 150, 74, 0.07),
-            transparent 55%
+            rgba(
+                201,
+                150,
+                74,
+                0.055
+            ),
+            transparent 58%
         ),
         var(--elysium-black);
 
-    border-top: 1px solid rgba(
-        201,
-        150,
-        74,
-        0.1
-    );
+    border-top:
+        1px solid
+        rgba(
+            201,
+            150,
+            74,
+            0.1
+        );
 }
+
 
 .menu-cta::before,
 .menu-cta::after {
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 350px;
-    height: 350px;
+    width:
+        350px;
 
-    border: 1px solid rgba(
-        201,
-        150,
-        74,
-        0.07
-    );
+    height:
+        350px;
 
-    border-radius: 50%;
+    border:
+        1px solid
+        rgba(
+            201,
+            150,
+            74,
+            0.05
+        );
 
-    pointer-events: none;
+    border-radius:
+        50%;
+
+    pointer-events:
+        none;
 }
+
 
 .menu-cta::before {
-    top: -220px;
-    left: -180px;
+    top:
+        -220px;
+
+    left:
+        -180px;
 }
+
 
 .menu-cta::after {
-    right: -180px;
-    bottom: -220px;
+    right:
+        -180px;
+
+    bottom:
+        -220px;
 }
+
 
 .menu-cta-content {
-    position: relative;
-    z-index: 1;
+    position:
+        relative;
 
-    max-width: 750px;
+    z-index:
+        1;
 
-    margin-inline: auto;
+    max-width:
+        700px;
 
-    text-align: center;
+    margin-inline:
+        auto;
+
+    text-align:
+        center;
 }
+
 
 .menu-cta-content h2 {
-    margin: 20px 0 25px;
+    margin:
+        18px 0 22px;
 
-    font-size: clamp(
-        3.5rem,
-        7vw,
-        7rem
-    );
+    font-size:
+        clamp(
+            3.2rem,
+            6vw,
+            6rem
+        );
 }
+
 
 .menu-cta-content p:not(.uppercase-label) {
-    max-width: 550px;
+    max-width:
+        520px;
 
-    margin: 0 auto 35px;
+    margin:
+        0 auto 32px;
 }
 
 
 /* =========================================================
-   9. EMPTY / LOADING STATES
+   10. DATABASE IMAGE PLACEHOLDER
    ========================================================= */
 
-.menu-loading {
-    display: flex;
+.drink-image-placeholder {
+    display:
+        flex;
 
-    align-items: center;
-    justify-content: center;
+    align-items:
+        center;
 
-    min-height: 300px;
+    justify-content:
+        center;
 
-    color: var(--elysium-muted);
-
-    font-size: 0.7rem;
-
-    letter-spacing: 0.2em;
-
-    text-transform: uppercase;
-}
-
-.menu-empty {
-    padding: 60px 20px;
-
-    color: var(--elysium-muted);
-
-    text-align: center;
-}
-
-.menu-empty h3 {
-    margin-bottom: 15px;
-
-    color: var(--elysium-cream);
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(
+                201,
+                150,
+                74,
+                0.1
+            ),
+            transparent 55%
+        ),
+        var(--elysium-black);
 }
 
 
-/* =========================================================
-   10. MENU ITEM HIDDEN STATE
-   ========================================================= */
+.drink-image-placeholder span {
+    color:
+        var(--elysium-gold);
 
-.menu-section.hidden {
-    display: none;
+    font-family:
+        var(--font-display);
+
+    font-size:
+        1.8rem;
+
+    letter-spacing:
+        0.18em;
+
+    opacity:
+        0.4;
 }
 
 
@@ -711,23 +1189,34 @@
 
 @media (max-width: 1000px) {
 
-    .menu-hero {
-        min-height: 65vh;
-
-        padding-bottom: 80px;
+    .food-card {
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto;
     }
+
 
     .menu-grid {
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
     }
+
 
     .simple-menu-grid {
-        column-gap: 50px;
+        column-gap:
+            45px;
     }
 
+
     .menu-tab {
-        padding-inline: 18px;
+        padding-inline:
+            18px;
     }
 
 }
@@ -739,125 +1228,216 @@
 
 @media (max-width: 768px) {
 
+    /* -----------------------------------------
+       Hero
+       ----------------------------------------- */
+
     .menu-hero {
-        min-height: 65vh;
+        min-height:
+            62vh;
 
         padding:
-            130px 0
-            70px;
+            125px 0 70px;
     }
+
 
     .menu-hero-content {
-        width: calc(100% - 40px);
+        width:
+            calc(100% - 40px);
     }
+
 
     .menu-hero-content h1 {
-        font-size: clamp(
-            4rem,
-            18vw,
-            6rem
-        );
-    }
-
-    .menu-hero-content > p:last-child {
-        font-size: 0.85rem;
-    }
-
-
-    /* Category navigation */
-
-    .menu-navigation {
-        top: 80px;
-    }
-
-    .menu-tabs {
-        justify-content: flex-start;
-    }
-
-    .menu-tab {
-        padding:
-            20px 16px;
-
-        font-size: 0.56rem;
-    }
-
-
-    /* Sections */
-
-    .menu-section {
-        padding: 90px 0;
-    }
-
-    .menu-section .section-intro {
-        margin-bottom: 50px;
-    }
-
-    .menu-section .section-intro h2 {
         font-size:
             clamp(
-                3rem,
-                14vw,
-                5rem
+                4rem,
+                18vw,
+                6rem
             );
     }
 
 
-    /* Drink cards */
+    .menu-hero-content > p:last-child {
+        font-size:
+            0.84rem;
 
-    .menu-grid {
-        grid-template-columns: 1fr;
-
-        gap: 20px;
-    }
-
-    .drink-card-image {
-        aspect-ratio: 5 / 4;
-    }
-
-    .drink-card-content {
-        padding: 25px;
-    }
-
-    .drink-card-heading h3 {
-        font-size: 1.8rem;
+        line-height:
+            1.7;
     }
 
 
-    /* Simple menu */
+    /* -----------------------------------------
+       Category Navigation
+       ----------------------------------------- */
+
+    .menu-navigation {
+        top:
+            80px;
+    }
+
+
+    .menu-tabs {
+        justify-content:
+            flex-start;
+
+        gap:
+            0;
+    }
+
+
+    .menu-tab {
+        padding:
+            18px 15px;
+
+        font-size:
+            0.55rem;
+
+        letter-spacing:
+            0.13em;
+    }
+
+
+    /* -----------------------------------------
+       Sections
+       ----------------------------------------- */
+
+    .menu-section {
+        padding:
+            82px 0;
+    }
+
+
+    .menu-section .section-intro {
+        margin-bottom:
+            35px;
+    }
+
+
+    .menu-section .section-intro h2 {
+        font-size:
+            clamp(
+                2.8rem,
+                13vw,
+                4.5rem
+            );
+    }
+
+
+    /* -----------------------------------------
+       Food List
+       ----------------------------------------- */
+
+    .food-card {
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto;
+
+        gap:
+            20px;
+
+        min-height:
+            95px;
+
+        padding:
+            21px 2px;
+    }
+
+
+    .food-card:hover {
+        padding-left:
+            6px;
+    }
+
+
+    .food-card-heading {
+        gap:
+            15px;
+    }
+
+
+    .food-card-heading h3 {
+        font-size:
+            1.35rem;
+    }
+
+
+    .food-price {
+        font-size:
+            1.05rem;
+    }
+
+
+    .food-description {
+        font-size:
+            0.7rem;
+
+        line-height:
+            1.55;
+    }
+
+
+    /* -----------------------------------------
+       Simple Menu
+       ----------------------------------------- */
 
     .simple-menu-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
-        column-gap: 0;
+        column-gap:
+            0;
     }
+
 
     .simple-menu-item {
-        min-height: 105px;
+        min-height:
+            95px;
 
-        gap: 20px;
+        gap:
+            18px;
     }
+
 
     .simple-menu-item h3 {
-        font-size: 1.55rem;
-    }
-
-    .simple-menu-item p {
-        font-size: 0.68rem;
+        font-size:
+            1.4rem;
     }
 
 
-    /* Food */
+    /* -----------------------------------------
+       Signature Drinks
+       ----------------------------------------- */
 
-    .food-card-content {
-        padding: 25px;
+    .menu-grid {
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
     }
 
 
-    /* CTA */
+    .drink-card-content {
+        padding:
+            22px;
+    }
+
+
+    .drink-card-heading h3 {
+        font-size:
+            1.6rem;
+    }
+
+
+    /* -----------------------------------------
+       CTA
+       ----------------------------------------- */
 
     .menu-cta {
-        padding: 100px 0;
+        padding:
+            95px 0;
     }
+
 
     .menu-cta-content h2 {
         font-size:
@@ -878,21 +1458,44 @@
 @media (max-width: 450px) {
 
     .menu-tab {
-        padding-inline: 13px;
+        padding-inline:
+            12px;
 
-        letter-spacing: 0.12em;
+        letter-spacing:
+            0.1em;
     }
 
-    .drink-card-heading {
-        align-items: center;
+
+    .food-card {
+        gap:
+            14px;
+
+        padding:
+            19px 0;
     }
 
-    .drink-card-heading h3 {
-        font-size: 1.6rem;
+
+    .food-card-heading h3 {
+        font-size:
+            1.2rem;
     }
+
+
+    .food-price {
+        font-size:
+            1rem;
+    }
+
 
     .simple-menu-item h3 {
-        font-size: 1.4rem;
+        font-size:
+            1.3rem;
+    }
+
+
+    .drink-card-heading h3 {
+        font-size:
+            1.5rem;
     }
 
 }
@@ -904,114 +1507,23 @@
 
 @media (prefers-reduced-motion: reduce) {
 
+    html {
+        scroll-behavior:
+            auto;
+    }
+
+
     .menu-hero-background img {
-        animation: none;
+        animation:
+            none;
     }
 
-    .drink-card-image img,
+
+    .food-card,
+    .drink-card,
     .food-card-image img {
-        transition: none;
-    }
-
-}
-
-
-/* =========================================================
-   DATABASE MENU IMAGE PLACEHOLDER
-   ========================================================= */
-
-.drink-image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(201, 150, 74, 0.12),
-            transparent 55%
-        ),
-        var(--elysium-black);
-}
-
-.drink-image-placeholder span {
-    color: var(--elysium-gold);
-
-    font-family: var(--font-display);
-
-    font-size: 2rem;
-
-    letter-spacing: 0.2em;
-
-    opacity: 0.5;
-}
-
-/* =========================================================
-   FOOD MENU GRID
-   ========================================================= */
-
-.food-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 25px;
-}
-
-
-/* =========================================================
-   FOOD IMAGE PLACEHOLDER
-   ========================================================= */
-
-.food-image-placeholder {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(201, 150, 74, 0.12),
-            transparent 55%
-        ),
-        var(--elysium-black);
-}
-
-.food-image-placeholder span {
-    color: var(--elysium-gold);
-
-    font-family: var(--font-display);
-
-    font-size: 2rem;
-
-    letter-spacing: 0.2em;
-
-    opacity: 0.5;
-}
-
-
-/* =========================================================
-   FOOD MOBILE
-   ========================================================= */
-
-@media (max-width: 1000px) {
-
-    .food-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-}
-
-
-@media (max-width: 768px) {
-
-    .food-grid {
-        grid-template-columns: 1fr;
-
-        gap: 20px;
+        transition:
+            none;
     }
 
 }
